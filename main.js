@@ -4,7 +4,6 @@ const {app, ipcMain} = require('electron')
 const mainWindow = require('./mainWindow')
 
 ipcMain.on('app-loaded', (e, itemURL) => {
-  console.log('got')
   mainWindow.loadPage('login.html')
 })
 

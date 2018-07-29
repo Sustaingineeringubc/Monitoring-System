@@ -1,0 +1,3 @@
+{"_id":"0000000000000001","hello":"world","n":5,"today":{"$$date":1532897840921},"nedbIsAwesome":true,"notthere":null,"fruits":["apple","orange","pear"],"infos":{"name":"nedb"}}
+{"hello":"world","n":5,"today":{"$$date":1532897707238},"nedbIsAwesome":true,"notthere":null,"fruits":["apple","orange","pear"],"infos":{"name":"nedb"},"_id":"3ftbxqmXDopPUjnY"}
+{"hello":"world","n":5,"today":{"$$date":1532897708073},"nedbIsAwesome":true,"notthere":null,"fruits":["apple","orange","pear"],"infos":{"name":"nedb"},"_id":"r12xfucckUFdlDIn"}
