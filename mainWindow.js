@@ -12,6 +12,27 @@ exports.win
 ipcMain.on('loading-state', (e, msg) => {
   e.sender.send('loading-state', loadingState)
 })
+
+ipcMain.on('is-new-user', async (e, msg) => {
+  console.log('recieved main')
+  try {
+    let isOldUser = await datastore.findUser(msg.email)
+    if (isOldUser) {
+      e.sender.send('is-new-user', {error:"User already exists"})
+      return
+    }
+    await datastore.newUser(msg.email, msg.password, true)
+    let focusedWindow    = BrowserWindow.getFocusedWindow()
+    focusedWindow.maximize();
+    let win = new BrowserWindow({width: 800, height: 600})
+    win.loadURL('https://github.com')
+    focusedWindow.loadURL('https://github.com')
+  } catch(error) {
+    console.log('error', error)
+    e.sender.send('is-new-user', false)
+  }
+})
+
 // mainWindow createWindow fn
 exports.createWindow = () => {
 
@@ -26,7 +47,7 @@ exports.createWindow = () => {
   //this.win.maximize();
 
   // Devtools
-  //this.win.webContents.openDevTools()
+  this.win.webContents.openDevTools()
 
   // Load main window content
   this.win.loadURL(`file://${__dirname}/renderer/main.html`)
@@ -45,6 +66,13 @@ exports.createWindow = () => {
 }
 
 
-exports.loadPage = (name) => {
-  this.win.loadURL(`file://${__dirname}/renderer/${name}`)
+var loadPage = exports.loadPage = (name) => {
+  console.log('log started', name)
+  if (name === 'monitor.html') {
+    this.win.loadURL('file://' + __dirname + '/renderer/monitor.html')
+
+  }  else{
+    this.win.loadURL(`file://${__dirname}/renderer/${name}`)
+  }
+
 }

@@ -12,7 +12,7 @@ const {ipcRenderer} = require('electron')
 
 function loadApp() {
   setTimeout(() => {
-    fecthState()
+  //  fecthState(5)
   }, 2000)
   setTimeout(function(){ 
     ipcRenderer.send('app-loaded', 'true') 
@@ -24,10 +24,15 @@ ipcRenderer.on('loading-state', (e, state) => {
   $('#loading-label').text(state);
 })
 
-function fecthState() {
+function fecthState(count) {
+  if (count === 1) {
+    console.log('exit recursion')
+    return
+  }
+  console.log(count)
   setTimeout(() => {
     ipcRenderer.send('loading-state', 'true') 
-    fecthState()
+    fecthState(count - 1)
   }, 1000)
 }
 
