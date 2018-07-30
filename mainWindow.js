@@ -1,12 +1,20 @@
 
 // Modules
-const {BrowserWindow} = require('electron')
+
+const {BrowserWindow, ipcMain} = require('electron')
 const datastore = require('./datastore.js')
 // BrowserWindow instance
-exports.win
 
+var loadingState = "Kicking off engines."
+
+
+exports.win
+ipcMain.on('loading-state', (e, msg) => {
+  e.sender.send('loading-state', loadingState)
+})
 // mainWindow createWindow fn
 exports.createWindow = () => {
+
 
   this.win = new BrowserWindow({
     height: 700,
@@ -18,15 +26,17 @@ exports.createWindow = () => {
   //this.win.maximize();
 
   // Devtools
-  this.win.webContents.openDevTools()
+  //this.win.webContents.openDevTools()
 
   // Load main window content
   this.win.loadURL(`file://${__dirname}/renderer/main.html`)
 
-  this.win.once('ready-to-show', () => {
+  this.win.once('ready-to-show', async () => {
     this.win.show()
-    datastore.initializeDataStore()
-
+    loadingState = "Initializing Local Datastore.."
+    await datastore.initializeDataStore()
+    loadingState = "Local Datastore initialized.."
+   // updateLoadingState('Initializing datastore')
   })  
   // Handle window closed
   this.win.on('closed', () => {
@@ -34,6 +44,7 @@ exports.createWindow = () => {
   })
 }
 
-  exports.loadPage = (name) => {
-    this.win.loadURL(`file://${__dirname}/renderer/${name}`)
-  }
+
+exports.loadPage = (name) => {
+  this.win.loadURL(`file://${__dirname}/renderer/${name}`)
+}

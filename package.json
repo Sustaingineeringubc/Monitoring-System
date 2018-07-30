@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/electron/electron-quick-start#readme",
   "devDependencies": {
-    "electron": "*",
     "devtron": "*",
+    "electron": "*",
     "electron-reload": "*"
   },
   "dependencies": {

@@ -4,14 +4,18 @@
 
 $ = require('jquery');
 
-console.log('loaded app js')
 
 const {ipcRenderer} = require('electron')
 
+
+
+
 function loadApp() {
+  setTimeout(() => {
+    fecthState()
+  }, 2000)
   setTimeout(function(){ 
-    console.log('time')
-   // ipcRenderer.send('app-loaded', 'true') 
+    ipcRenderer.send('app-loaded', 'true') 
     $('#loading-label').text('text changed')
     }, 5000);
 }
@@ -19,5 +23,12 @@ function loadApp() {
 ipcRenderer.on('loading-state', (e, state) => {
   $('#loading-label').text(state);
 })
+
+function fecthState() {
+  setTimeout(() => {
+    ipcRenderer.send('loading-state', 'true') 
+    fecthState()
+  }, 1000)
+}
 
 loadApp()

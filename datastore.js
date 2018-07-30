@@ -5,19 +5,23 @@ var initializeDataStore = exports.initializeDataStore = () => {
         var db = {};
 
         db.userInfo = new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true });
-        db.userInfo.find({ _id: '0000000000000001' }, (err, docs) => {
-            console.log(err, docs, docs.length)
+        db.userInfo.find({ _id: '0000000000000001' }, (error, docs) => {
+            if (error) {
+                return reject(error)
+            }
             if (docs.length !== 0) {
-                console.log('returniun')
-                return
+                return resolve();
             }
             db.userSettings = new Datastore({ filename: `${__dirname}/datastore/local/userSettings`, autoload: true });
             db.dataCollection = new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true });
-            console.log('not returned')
             var doc = { 
                         _id: '0000000000000001'
                     };
-            db.userInfo.insert(doc, function (err, newDoc) {   // Callback is optional
+            db.userInfo.insert(doc, error => {   // Callback is optional
+                if (error) {
+                    return reject(error)
+                }
+                return resolve();
             });
         });
     })
