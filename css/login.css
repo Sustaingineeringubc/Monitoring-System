@@ -17,6 +17,11 @@ html,body {
   margin-top: -70px;
   padding-bottom: 20px;
 }
+
+.button.is-primary {
+  background-color: rgb(43,141,136);
+}
+
 .avatar img {
   width: 128px;
   padding: 5px;
