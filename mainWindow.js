@@ -22,11 +22,11 @@ ipcMain.on('is-new-user', async (e, msg) => {
       return
     }
     await datastore.newUser(msg.email, msg.password, true)
-    let focusedWindow    = BrowserWindow.getFocusedWindow()
-    focusedWindow.maximize();
     let win = new BrowserWindow({width: 800, height: 600})
-    win.loadURL('https://github.com')
-    focusedWindow.loadURL('https://github.com')
+    win.loadURL(`file://${__dirname}/renderer/monitor.html`)
+    this.win.close()
+    this.win = win
+
   } catch(error) {
     console.log('error', error)
     e.sender.send('is-new-user', false)
@@ -53,6 +53,7 @@ exports.createWindow = () => {
   this.win.loadURL(`file://${__dirname}/renderer/main.html`)
 
   this.win.once('ready-to-show', async () => {
+    console.log('readytoshow')
     this.win.show()
     loadingState = "Initializing Local Datastore.."
     await datastore.initializeDataStore()
