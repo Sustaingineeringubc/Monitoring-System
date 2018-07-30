@@ -26,3 +26,34 @@ var initializeDataStore = exports.initializeDataStore = () => {
         });
     })
 }
+
+exports.newUser = function(email, password, isRemembered) {
+    return new Promise((reject, resolve) => {
+        var db = {};
+        db.userSettings = new Datastore({ filename: `${__dirname}/datastore/local/userSettings`, autoload: true });
+        db.userInfo = new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true });
+
+        var uInfoDoc = { 
+           email: email,
+           password: password,
+           created_at: Math.round((new Date()).getTime() / 1000),
+           session: false,
+        };
+
+        var uSettDoc = {
+            isRemembered: isRemembered
+        }
+
+        db.userInfo.insert(uInfoDoc, error => {
+            if (error) {
+                return reject(error)
+            }
+            db.userSettings.insert(uSettDoc, error => {
+                if (error) {
+                    return reject(error)
+                }
+                return resolve();
+            });
+        });
+    })
+}

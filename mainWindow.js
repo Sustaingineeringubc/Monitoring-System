@@ -12,6 +12,17 @@ exports.win
 ipcMain.on('loading-state', (e, msg) => {
   e.sender.send('loading-state', loadingState)
 })
+
+ipcMain.on('is-new-user', async (e, msg) => {
+
+  try {
+    await datastore.newUser(msg.email, msg.password, true)
+    e.sender.send('is-new-user', true)
+  } catch (error) {
+    e.sender.send('is-new-user', false)
+  }
+})
+
 // mainWindow createWindow fn
 exports.createWindow = () => {
 
@@ -23,10 +34,10 @@ exports.createWindow = () => {
   })
 
 
-  //this.win.maximize();
+  this.win.maximize();
 
   // Devtools
-  //this.win.webContents.openDevTools()
+  this.win.webContents.openDevTools()
 
   // Load main window content
   this.win.loadURL(`file://${__dirname}/renderer/main.html`)

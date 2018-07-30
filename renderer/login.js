@@ -8,6 +8,9 @@ $('#login-button').click(() => {
         return
     }
 
+    ipcRenderer.send('is-new-user', {password, email}) 
+
+
     // Get URL from input
   
   })
