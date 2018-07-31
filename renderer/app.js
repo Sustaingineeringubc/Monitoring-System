@@ -26,10 +26,8 @@ ipcRenderer.on('loading-state', (e, state) => {
 
 function fecthState(count) {
   if (count === 1) {
-    console.log('exit recursion')
     return
   }
-  console.log(count)
   setTimeout(() => {
     ipcRenderer.send('loading-state', 'true') 
     fecthState(count - 1)

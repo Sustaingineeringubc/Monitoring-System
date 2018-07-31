@@ -1,8 +1,5 @@
 const {ipcRenderer} = require('electron')
 
-
-console.log('iniiit')
-
 $('#login-button').click(() => {
     
     let password = $('#password').val();
