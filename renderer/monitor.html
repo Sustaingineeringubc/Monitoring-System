@@ -11,50 +11,37 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <!-- Bulma Version 0.7.1-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <link rel="stylesheet" type="text/css" href="../css/monitor.css">
 </head>
 
 <body>
-    <section class="hero is-success is-fullheight">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="column is-4 is-offset-4">
-                    <h3 class="title has-text-grey">Login</h3>
-                    <p class="subtitle has-text-grey">Please login to proceed.</p>
-                    <div class="box">
-                        <figure class="avatar">
-                            <img src="../assets/sistaingineering.BlackBkg.png">
-                        </figure>
-                    
-                            <div class="field">
-                                <div class="control">
-                                    <input class="input is-normal" type="email" placeholder="Your Email" autofocus="" id="email">
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <div class="control">
-                                    <input class="input is-normal" type="password" placeholder="Your Password" id="password">
-                                </div>
-                            </div>
-                            <div class="field">
-                                <label class="checkbox">
-                  <input type="checkbox" id="remember">
-                  Remember me
-                </label>
-                            </div>
-                            <button class="button is-block is-primary is-fullwidth" id="login-button">Login</button>
-                        
-                    </div>
-                    <p class="has-text-grey">
-                        <a href="../">Sign Up</a> &nbsp;·&nbsp;
-                        <a href="../">Forgot Password</a> &nbsp;·&nbsp;
-                        <a href="../">Need Help?</a>
-                    </p>
-                </div>
+    <div class="container">
+        <div class="columns is-desktop">
+            <div class="column is-one-third">
+                <center>Load Voltage</center> 
             </div>
-        </div>
-    </section>
+            <div class="column is-one-third">
+                <center>Load Current</center>
+            </div>
+            <div class="column is-one-third">
+                <center>Power Absorbed</center> 
+            </div>
+        </div>  
+
+        <div class="columns is-desktop">
+                <div class="column is-one-third">
+                    <center>Operating Temperature</center> 
+                </div>
+                <div class="column is-one-third">
+                    <center>Surface Temperature</center>
+                </div>
+                <div class="column is-one-third">
+                    <center>Water Break</center> 
+                </div>
+        </div>    
+    </div>
+
+    <!-- Scripts -->
     <script async type="text/javascript" src="../js/bulma.js"></script>
     <script>
 
@@ -62,9 +49,9 @@
             $ = require('jquery')
         
             // Main app script
-            require('./login')
+            require('./monitor')
         
-          </script>
+    </script>
 </body>
 
 </html>

@@ -1,3 +1,19 @@
 .hero.is-success {
     background: #F2F6FA;
-  }
+}
+
+.border-test {
+    border-style: solid;
+    border-color: blue;
+}
+
+body {
+  padding-top: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 1%;
+}
+
+.column {
+  background-color: rgb(43,141,136);
+}
