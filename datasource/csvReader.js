@@ -4,6 +4,7 @@ fs = require('fs')
 
 exports.readCSVFile = function(file) {
 	return new Promise((resolve) => {
+
 		const readStream = fs.createReadStream('test-csv.csv')
 			.pipe(csv({headers : true}))
 			.on('data', data => {

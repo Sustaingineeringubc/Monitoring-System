@@ -8,7 +8,7 @@ ipcMain.on('app-loaded', (e, itemURL) => {
 })
 
 // Enable Electron-Reload
-require('electron-reload')(__dirname)
+//require('electron-reload')(__dirname)
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
