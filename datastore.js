@@ -57,30 +57,41 @@ exports.createSession = function(userId) {
 }
 
 exports.loginUser = function(email, password, isRemember) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         try {
             var db = {};
-            db.userInfo =  new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true })
-            db.userInfo.find({ email: email, password: password }, (error, docs) => {
-                if (error) {
-                    return reject(error)
-                }
-                if (docs.length === 0) {
-                    return reject('Incorrect email or password')
-                }
-                db.userSettings.insert(uSettDoc, error => {
+            db.userSettings =  new Datastore({ filename: `${__dirname}/datastore/local/userSettings`, autoload: true })
+
+            const user = await find({ email: email, password: password }, 'userInfo')
+            if (user.length === 0) {
+                return reject('Incorrect email or password')
+            }
+
+            const setting = await find({ userId: user.Id}, 'userSettings')
+            const uSettDoc = {
+                userId: user[0]._id,
+                isRemembered: isRemember
+            }
+            if (setting.length === 0) {
+                db.userSettings.insert(uSettDoc, (error, newDoc)=> {
                     if (error) {
-                        console.log('rej', error)
-    
                         return reject(error)
                     }
-                    console.log('resolvingnew user')
-                    return resolve();
+                    return resolve(true);
                 });
-                return resolve(true);
-            })
-        } catch(error) {
+            } else {
+                db.userSettings.update(setting, uSettDoc, {}, (error, settingReplaced) => {
+                    if (error) {
+                        return reject(error)
+                    }
+                    return resolve(true)
+                })
+            }
 
+        } catch(error) {
+            if (error) {
+                return reject(error)
+            }
         }
     })
 }
@@ -99,13 +110,7 @@ exports.newUser = function(email, password) {
 
         db.userInfo.insert(uInfoDoc, (error, newDoc) => {
             if (error) {
-                console.log('rej', error)
                 return reject(error)
-            }
-            console.log(newDoc)
-            var uSettDoc = {
-                userId: newDoc._id,
-                isRemembered: isRemembered
             }
         });
     })
