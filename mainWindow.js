@@ -7,7 +7,6 @@ const datastore = require('./datastore.js')
 
 var loadingState = "Kicking off engines."
 
-
 exports.win
 ipcMain.on('loading-state', (e, msg) => {
   e.sender.send('loading-state', loadingState)
