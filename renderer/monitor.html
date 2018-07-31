@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -12,52 +11,62 @@
     <!-- Bulma Version 0.7.1-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/monitor.css">
+    <link rel="stylesheet" href="/Users/febg/Downloads/Electron/Monitoring-System/bower_components/chartist/dist/chartist.css">
+    <script src="/Users/febg/Downloads/Electron/Monitoring-System/bower_components/chartist/dist/chartist.js"></script>
 </head>
 
 <body>
-    <div>
-        <nav class="level is-desktop">
-            <div class="level-item-left has-text-centered">
-                <div>
-                <p class="heading">Load Voltage</p>
-                <p class="title">3,456</p>
+    <section>
+            <div>
+                    <nav class="level is-desktop">
+                        <div class="level-item-left has-text-centered">
+                            <div>
+                            <p class="heading">Load Voltage</p>
+                            <p class="title">3,456</p>
+                            </div>
+                        </div>
+                        <div class="level-item-center has-text-centered">
+                            <div>
+                            <p class="heading">Load Current</p>
+                            <p class="title">123</p>
+                            </div>
+                        </div>
+                        <div class="level-item-right has-text-centered">
+                            <div>
+                            <p class="heading">Power Absorbed</p>
+                            <p class="title">456K</p>
+                            </div>
+                        </div>
+                    </nav>
+            
+                    <nav class="level is-desktop">
+                        <div class="level-item-left has-text-centered">
+                            <div>
+                            <p class="heading">Operating Temperature</p>
+                            <p class="title">3,456</p>
+                            </div>
+                        </div>
+                        <div class="level-item-center has-text-centered">
+                            <div>
+                            <p class="heading">Surface Temperature</p>
+                            <p class="title">123</p>
+                            </div>
+                        </div>
+                        <div class="level-item-right has-text-centered">
+                            <div>
+                            <p class="heading">Water Breaker</p>
+                            <p class="title">456K</p>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
-            </div>
-            <div class="level-item-center has-text-centered">
-                <div>
-                <p class="heading">Load Current</p>
-                <p class="title">123</p>
-                </div>
-            </div>
-            <div class="level-item-right has-text-centered">
-                <div>
-                <p class="heading">Power Absorbed</p>
-                <p class="title">456K</p>
-                </div>
-            </div>
-        </nav>
+     </section>
+    <section>
+            
+        <div class="ct-chart ct-perfect-fourth"></div>
+                
+    </section>
 
-        <nav class="level is-desktop">
-            <div class="level-item-left has-text-centered">
-                <div>
-                <p class="heading">Operating Temperature</p>
-                <p class="title">3,456</p>
-                </div>
-            </div>
-            <div class="level-item-center has-text-centered">
-                <div>
-                <p class="heading">Surface Temperature</p>
-                <p class="title">123</p>
-                </div>
-            </div>
-            <div class="level-item-right has-text-centered">
-                <div>
-                <p class="heading">Water Breaker</p>
-                <p class="title">456K</p>
-                </div>
-            </div>
-        </nav>
-    </div>
 
     <!-- Scripts -->
     <script async type="text/javascript" src="../js/bulma.js"></script>
@@ -71,5 +80,4 @@
         
     </script>
 </body>
-
 </html>

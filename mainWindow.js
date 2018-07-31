@@ -3,9 +3,14 @@
 
 const {BrowserWindow, ipcMain} = require('electron')
 const datastore = require('./datastore.js')
+const csvReader = require('./datasource/csvReader')
+
+csvReader.readCSVFile('file')
 // BrowserWindow instance
 
 var loadingState = "Kicking off engines."
+
+
 
 exports.win
 ipcMain.on('loading-state', (e, msg) => {
@@ -40,6 +45,7 @@ ipcMain.on('log-in', async (e, msg) => {
     }
     let win = new BrowserWindow({width: 800, height: 600})
     win.loadURL(`file://${__dirname}/renderer/monitor.html`)
+    //win.webContents.openDevTools()
     this.win.close()
     this.win = win
 
@@ -63,7 +69,7 @@ exports.createWindow = () => {
   //this.win.maximize();
 
   // Devtools
-  this.win.webContents.openDevTools()
+  //this.win.webContents.openDevTools()
 
   // Load main window content
   this.win.loadURL(`file://${__dirname}/renderer/main.html`)

@@ -12,7 +12,7 @@ const {ipcRenderer} = require('electron')
 
 function loadApp() {
   setTimeout(() => {
-  //  fecthState(5)
+    fecthState(5)
   }, 2000)
   setTimeout(function(){ 
     ipcRenderer.send('app-loaded', 'true') 
