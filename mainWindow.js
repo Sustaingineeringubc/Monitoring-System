@@ -21,6 +21,25 @@ ipcMain.on('is-new-user', async (e, msg) => {
       e.sender.send('is-new-user', {error:"User already exists"})
       return
     }
+    await datastore.newUser(msg.email, msg.password)
+    let win = new BrowserWindow({width: 800, height: 600})
+    win.loadURL(`file://${__dirname}/renderer/monitor.html`)
+    this.win.close()
+    this.win = win
+
+  } catch(error) {
+    console.log('error', error)
+    e.sender.send('is-new-user', false)
+  }
+})
+
+ipcMain.on('log-in', async (e, msg) => {
+  try {
+    let isLoggedIn = await datastore.findUser(msg.email, msg.password)
+    if (isOldUser) {
+      e.sender.send('is-new-user', {error:"User already exists"})
+      return
+    }
     await datastore.newUser(msg.email, msg.password, true)
     let win = new BrowserWindow({width: 800, height: 600})
     win.loadURL(`file://${__dirname}/renderer/monitor.html`)

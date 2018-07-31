@@ -44,10 +44,50 @@ exports.findUser = function(email) {
     })
 }
 
-exports.newUser = function(email, password, isRemembered) {
+exports.createSession = function(userId) {
+    db.userInfo.find({ email: email }, (error, docs) => {
+        if (error) {
+            return reject(error)
+        }
+        if (docs.length === 0) {
+            return resolve(false)
+        }
+        return resolve(true);
+    })
+}
+
+exports.loginUser = function(email, password, isRemember) {
+    return new Promise((resolve, reject) => {
+        try {
+            var db = {};
+            db.userInfo =  new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true })
+            db.userInfo.find({ email: email, password: password }, (error, docs) => {
+                if (error) {
+                    return reject(error)
+                }
+                if (docs.length === 0) {
+                    return reject('Incorrect email or password')
+                }
+                db.userSettings.insert(uSettDoc, error => {
+                    if (error) {
+                        console.log('rej', error)
+    
+                        return reject(error)
+                    }
+                    console.log('resolvingnew user')
+                    return resolve();
+                });
+                return resolve(true);
+            })
+        } catch(error) {
+
+        }
+    })
+}
+
+exports.newUser = function(email, password) {
     return new Promise((resolve, reject) => {
         var db = {};
-        db.userSettings = new Datastore({ filename: `${__dirname}/datastore/local/userSettings`, autoload: true });
         db.userInfo = new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true });
 
         var uInfoDoc = { 
@@ -67,19 +107,6 @@ exports.newUser = function(email, password, isRemembered) {
                 userId: newDoc._id,
                 isRemembered: isRemembered
             }
-            db.userSettings.insert(uSettDoc, error => {
-                if (error) {
-                    console.log('rej', error)
-
-                    return reject(error)
-                }
-                console.log('resolvingnew user')
-                return resolve();
-            });
         });
-
-     
-
-       
     })
 }
