@@ -1,3 +1,35 @@
 .hero.is-success {
     background: #F2F6FA;
-  }
+}
+
+.border-test {
+    border-style: solid;
+    border-color: blue;
+}
+
+body {
+  padding-top: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 1%;
+}
+
+
+.box {
+	width: 40%;
+	float: right;
+	margin: 4%;
+}
+
+.level-item-left {
+  width: 32%;
+}
+
+.level-item-center {
+  width: 32%;
+}
+
+.level-item-right {
+  width: 32%;
+}
+
