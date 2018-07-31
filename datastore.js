@@ -110,3 +110,16 @@ exports.newUser = function(email, password) {
         });
     })
 }
+
+var find = exports.find = function(object, tableName) {
+    return new Promise((resolve, reject) => {
+        var db = {};
+            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+            db.schema.find(object, (error, docs) => {
+            if (error) {
+                return reject(error)
+            }
+            return resolve(docs);
+        })
+    })
+}
