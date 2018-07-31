@@ -20,7 +20,7 @@ var data = {
   let power_absorbed_value = $('#power-absorbed-value');
   let operating_temp_value = $('#operating-temp-value');
   let surface_temp_value = $('#surface-temp-value');
-  let water_breaker_value = $('#surface-temp-value');
+  let water_breaker_value = $('#water-breaker-value');
 
   
   function fetchData() {
