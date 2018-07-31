@@ -13,7 +13,6 @@ ipcMain.on('loading-state', (e, msg) => {
 })
 
 ipcMain.on('is-new-user', async (e, msg) => {
-  console.log('recieved main')
   try {
     let isOldUser = await datastore.findUser(msg.email)
     if (isOldUser) {
@@ -34,12 +33,11 @@ ipcMain.on('is-new-user', async (e, msg) => {
 
 ipcMain.on('log-in', async (e, msg) => {
   try {
-    let isLoggedIn = await datastore.findUser(msg.email, msg.password)
-    if (isOldUser) {
-      e.sender.send('is-new-user', {error:"User already exists"})
+    let isLoggedIn = await datastore.loginUser(msg.email, msg.password, msg.isRemembered)
+    if (!isLoggedIn) {
+      e.sender.send('log-in', {error:"User already exists"})
       return
     }
-    await datastore.newUser(msg.email, msg.password, true)
     let win = new BrowserWindow({width: 800, height: 600})
     win.loadURL(`file://${__dirname}/renderer/monitor.html`)
     this.win.close()
@@ -71,7 +69,6 @@ exports.createWindow = () => {
   this.win.loadURL(`file://${__dirname}/renderer/main.html`)
 
   this.win.once('ready-to-show', async () => {
-    console.log('readytoshow')
     this.win.show()
     loadingState = "Initializing Local Datastore.."
     await datastore.initializeDataStore()
@@ -86,7 +83,6 @@ exports.createWindow = () => {
 
 
 var loadPage = exports.loadPage = (name) => {
-  console.log('log started', name)
   if (name === 'monitor.html') {
     this.win.loadURL('file://' + __dirname + '/renderer/monitor.html')
 
