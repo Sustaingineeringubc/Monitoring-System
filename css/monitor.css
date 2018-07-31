@@ -14,6 +14,22 @@ body {
   padding-bottom: 1%;
 }
 
-.column {
-  background-color: rgb(43,141,136);
+
+.box {
+	width: 40%;
+	float: right;
+	margin: 4%;
 }
+
+.level-item-left {
+  width: 32%;
+}
+
+.level-item-center {
+  width: 32%;
+}
+
+.level-item-right {
+  width: 32%;
+}
+
