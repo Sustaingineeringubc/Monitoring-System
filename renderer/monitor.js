@@ -32,7 +32,10 @@ var data = {
 
   ipcRenderer.on('is-data-updated', (e, msg) => {
     if (msg.error) {
-        alert( msg.error)
+      return  alert( msg.error)
+    }
+    if (!msg.data) {
+      return
     }
     load_voltage_value.text(msg.data.voltage)
     load_current_value.text(msg.data.current)
