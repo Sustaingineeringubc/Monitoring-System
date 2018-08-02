@@ -1,3 +1,4 @@
 datastore/
 package-lock.json
+test-csv.csv
 node_modules/
