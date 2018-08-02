@@ -94,23 +94,19 @@ exports.loginUser = function(email, password, isRemember) {
 
 exports.newUser = function(email, password) {
     return new Promise((resolve, reject) => {
-        var db = {};
-        db.userInfo = new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true });
-
+        // Document object declaration
         var uInfoDoc = { 
-           email: email,
-           password: password,
-           created_at: Math.round((new Date()).getTime() / 1000),
-           session: false,
+            email: email,
+            password: password,
+            created_at: Math.round((new Date()).getTime() / 1000),
+            session: false,
         };
-
-        db.userInfo.insert(uInfoDoc, (error, newDoc) => {
-            if (error) {
-                return reject(error)
-            }
-        });
+        // Insert document into database
+        let newDoc = await insert(uInfoDoc, "userInfo")
     })
 }
+
+//wrappers
 
 var find = exports.find = function(object, tableName) {
     return new Promise((resolve, reject) => {
@@ -122,5 +118,70 @@ var find = exports.find = function(object, tableName) {
             }
             return resolve(docs);
         })
+    })
+}
+
+var insert = exports.insert = function(object, tableName) {
+    return new Promise ((resolve, reject) => {
+        var db = {};
+            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+            db.schema.insert(object, (error, newDoc) => {
+                if (error) {
+                    return reject(error)
+                }
+                return resolve(newDoc);
+            })
+    })
+}
+
+var update = exports.update = function(object, query, updateModifier, options, tableName) {
+    return new Promise ((resolve,reject) => {
+        var db = {};
+            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+            db.schema.update(query, updateModifier, options, (error, settingReplaced, affectedDocuments, upsert) => {
+                if (error) {
+                    return reject(error)
+                }
+            return resolve(settingReplaced, affectedDocuments, upsert);
+            })
+    })
+}
+
+var remove = exports.remove = function (object, options, tableName) {
+    return new Promise ((resolve,reject) => {
+        var db = {};
+            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+            db.schema.remove(options, (error, numRemoved) => {
+                if (error) {
+                    return reject(error)
+                }
+                return resolve(numRemoved);
+            })
+    })
+}
+
+var findOne = exports.findOne = function (object, tableName) {
+    return new Promise ((resolve,reject) => {
+        var db = {};
+            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+            db.schema.findOne(object, (error, doc) => {
+                if (error) {
+                    return reject(error)
+                }
+                return resolve(doc);
+            })
+    })
+}
+
+var count = exports.count = function (object, tableName) {
+    return new Promise ((resolve,reject) => {
+        var db = {};
+            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+            db.schema.count(object, (error, count) => {
+                if (error) {
+                    return reject(error)
+                }
+                return resolve(count);
+            })
     })
 }
