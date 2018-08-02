@@ -3,7 +3,6 @@ var Datastore = require('nedb')
 var initializeDataStore = exports.initializeDataStore = () => {
     return new Promise((resolve, reject) => {
         var db = {};
-
         db.userInfo = new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true });
         db.userInfo.find({ _id: '0000000000000001' }, (error, docs) => {
             if (error) {
@@ -31,7 +30,6 @@ exports.findUser = function(email) {
     return new Promise((resolve, reject) => {
         var db = {};
         db.userInfo = new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true });
-
         db.userInfo.find({ email: email }, (error, docs) => {
             if (error) {
                 return reject(error)
@@ -61,12 +59,10 @@ exports.loginUser = function(email, password, isRemember) {
         try {
             var db = {};
             db.userSettings =  new Datastore({ filename: `${__dirname}/datastore/local/userSettings`, autoload: true })
-
             const user = await find({ email: email, password: password }, 'userInfo')
             if (user.length === 0) {
                 return reject('Incorrect email or password')
             }
-
             const setting = await find({ userId: user.Id}, 'userSettings')
             const uSettDoc = {
                 userId: user[0]._id,
