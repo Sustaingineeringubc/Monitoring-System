@@ -103,6 +103,10 @@ exports.newUser = function(email, password) {
         };
         // Insert document into database
         let newDoc = await insert(uInfoDoc, "userInfo")
+        if (error) {
+            return reject(error)
+        }
+        return resolve(docs);
     })
 }
 
@@ -111,8 +115,8 @@ exports.newUser = function(email, password) {
 var find = exports.find = function(object, tableName) {
     return new Promise((resolve, reject) => {
         var db = {};
-            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-            db.schema.find(object, (error, docs) => {
+        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+        db.schema.find(object, (error, docs) => {
             if (error) {
                 return reject(error)
             }
@@ -124,64 +128,64 @@ var find = exports.find = function(object, tableName) {
 var insert = exports.insert = function(object, tableName) {
     return new Promise ((resolve, reject) => {
         var db = {};
-            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-            db.schema.insert(object, (error, newDoc) => {
-                if (error) {
-                    return reject(error)
-                }
-                return resolve(newDoc);
-            })
+        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+        db.schema.insert(object, (error, newDoc) => {
+            if (error) {
+                return reject(error)
+            }
+            return resolve(newDoc);
+        })
     })
 }
 
 var update = exports.update = function(object, query, updateModifier, options, tableName) {
     return new Promise ((resolve,reject) => {
         var db = {};
-            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-            db.schema.update(query, updateModifier, options, (error, settingReplaced, affectedDocuments, upsert) => {
-                if (error) {
-                    return reject(error)
-                }
+        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+        db.schema.update(object, query, updateModifier, options, (error, settingReplaced, affectedDocuments, upsert) => {
+            if (error) {
+                return reject(error)
+            }
             return resolve(settingReplaced, affectedDocuments, upsert);
-            })
+        })
     })
 }
 
-var remove = exports.remove = function (object, options, tableName) {
+var remove = exports.remove = function (object, query, options, tableName) {
     return new Promise ((resolve,reject) => {
         var db = {};
-            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-            db.schema.remove(options, (error, numRemoved) => {
-                if (error) {
-                    return reject(error)
-                }
-                return resolve(numRemoved);
-            })
+        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+        db.schema.remove(object, query, options, (error, numRemoved) => {
+            if (error) {
+                return reject(error)
+            }
+            return resolve(numRemoved);
+        })
     })
 }
 
 var findOne = exports.findOne = function (object, tableName) {
     return new Promise ((resolve,reject) => {
         var db = {};
-            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-            db.schema.findOne(object, (error, doc) => {
-                if (error) {
-                    return reject(error)
-                }
-                return resolve(doc);
-            })
+        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+        db.schema.findOne(object, (error, doc) => {
+            if (error) {
+                return reject(error)
+            }
+            return resolve(doc);
+        })
     })
 }
 
 var count = exports.count = function (object, tableName) {
     return new Promise ((resolve,reject) => {
         var db = {};
-            db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-            db.schema.count(object, (error, count) => {
-                if (error) {
-                    return reject(error)
-                }
-                return resolve(count);
-            })
+        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
+        db.schema.count(object, (error, count) => {
+            if (error) {
+                return reject(error)
+            }
+            return resolve(count);
+        })
     })
 }
