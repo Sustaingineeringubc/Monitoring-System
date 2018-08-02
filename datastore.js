@@ -103,10 +103,7 @@ exports.newUser = function(email, password) {
         };
         // Insert document into database
         let newDoc = await insert(uInfoDoc, "userInfo")
-        if (error) {
-            return reject(error)
-        }
-        return resolve(docs);
+        return resolve();
     })
 }
 
