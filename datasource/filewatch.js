@@ -9,6 +9,14 @@ var lastUpdate = null;
 var isDataUpdated = false
 const fs = require('fs');
 
+const DATA_TYPE_HISTORY = 'DATA_TYPE_HISTORY';
+const DATA_TYPE_SUMARY = 'DATA_TYPE_SUMARY';
+
+//TODO
+const DATA_TYPE_REAL_TIME = 'DATA_TYPE_REAL_TIME';
+const DATA_TYPE_STATS = 'DATA_TYPE_STATS';
+
+
 try {
   fs.watchFile('test-csv.csv', (curr, prev) => {
     fs.stat('test-csv.csv', (err, stats) => {
@@ -63,12 +71,22 @@ try {
 
 
 ipcMain.on('is-data-updated', (e, msg) => {
-    try {
-     if (isDataUpdated) {
-      return
-     }
-     isDataUpdated = true
-     e.sender.send('is-data-updated', {data: lastUpdate})
+    try { 
+      if (isDataUpdated) {
+        return
+       }
+      switch(msg.dataType) {
+        case DATA_TYPE_HISTORY:
+          setting.to = to;
+          setting.from = from;
+          break
+        case DATA_TYPE_SUMARY:
+          isDataUpdated = true
+          e.sender.send('is-data-updated', {data: lastUpdate})
+          break
+        default:
+          break;
+      }
     } catch(error) {
       e.sender.send('is-data-updated', false)
     }
