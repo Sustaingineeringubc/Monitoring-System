@@ -1,4 +1,5 @@
 var Datastore = require('nedb')
+var _ = require('lodash');
 
 var user_id = exports.user_id - null
 
@@ -149,6 +150,55 @@ exports.getSummaryData = function(pumpId) {
             console.log(error)
         }
     }) 
+}
+
+exports.getRealTime = function(data)  {
+    return new Promise((resolve, reject) => {
+        try{
+            let userId = user_id;
+            let pumpId = data.pumpId;
+            let count = 5
+            var db = new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true  });
+            db
+            .find({ userId: userId, pumpId: pumpId })
+            .sort({ createdAt: -1 })      // OR `.sort({ updatedAt: -1 })` to sort by last modification time
+            .limit(count)
+            .exec(function(error, data) {
+
+                if (error) {
+                    return reject(error)
+                }
+
+                let voltageList = new Array();
+                let currentList = new Array();
+                let powerList = new Array();
+                let opTempList = new Array();
+                let suTempList = new Array();
+                let waterBreakerList = new Array();
+
+                _.forEach(data, doc => {
+                    voltageList.push(doc.voltage)
+                    currentList.push(doc.current)
+                    powerList.push(doc.power)
+                    opTempList.push(doc.opTemp)
+                    suTempList.push(doc.suTemp)
+                    waterBreakerList.push(doc.waterBreaker)
+                })
+                let response =  [
+                    voltageList,
+                    currentList,
+                    powerList,
+                    opTempList,
+                    suTempList,
+                    waterBreakerList
+                ]
+                return resolve(response)
+            });
+        } catch(error) {
+            console.log(error)
+            return reject(error)
+        } 
+    })
 }
 
 //wrappers

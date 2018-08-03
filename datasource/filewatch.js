@@ -83,14 +83,20 @@ ipcMain.on('is-data-updated', async (e, msg) => {
     if (!needsUpdate) {
       return
     }
+    console.log(msg)
+    var data = {};
     switch(msg.dataType) {
       case DATA_TYPE_HISTORY:
         setting.to = to;
         setting.from = from;
         break
       case DATA_TYPE_SUMARY:
-        console.log(msg)
-        let data = await datastore.getSummaryData(msg.pump_id)
+        data = await datastore.getSummaryData(msg.pump_id)
+        e.sender.send('is-data-updated', {data: data})
+        break
+      case DATA_TYPE_REAL_TIME:
+        data = await datastore.getRealTime({pumpId: msg.pump_id})
+        console.log('sending', {data: data})
         e.sender.send('is-data-updated', {data: data})
         break
       default:
