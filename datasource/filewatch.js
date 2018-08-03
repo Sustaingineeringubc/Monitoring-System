@@ -20,7 +20,7 @@ try {
         .pipe(csv({headers : false}))
         .on('data', data => {
           startByte = stats.size;
-          if (data.length === 7) {
+          if (data.length !== 7) {
             return
           }
           if (!initiatedRead) {
