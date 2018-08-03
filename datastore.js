@@ -1,5 +1,7 @@
 var Datastore = require('nedb')
 
+var user_id = exports.user_id - null
+
 var initializeDataStore = exports.initializeDataStore = () => {
     return new Promise((resolve, reject) => {
         var db = {};
@@ -63,6 +65,7 @@ exports.loginUser = function(email, password, isRemember) {
             if (user.length === 0) {
                 return reject('Incorrect email or password')
             }
+            user_id = user[0]._id
             const setting = await find({ userId: user.Id}, 'userSettings')
             const uSettDoc = {
                 userId: user[0]._id,
@@ -116,6 +119,7 @@ exports.storeSensorData = function(data) {
     return new Promise(async (resolve, reject) => {
         try {
             data.createdAt = Math.round(new Date().getTime() / 1000);
+            data.userId = user_id;
             let newDoc = await insert(data, "dataCollection");
             return resolve()
         } catch(error) {
@@ -123,6 +127,28 @@ exports.storeSensorData = function(data) {
             return reject(error);
         }
     })
+}
+
+exports.getSummaryData = function(pumpId) {
+    return new Promise((resolve, reject) => {
+        try {
+            let userId = user_id;
+            var db = new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true  });
+            console.log('find', userId, pumpId)
+            db
+            .findOne({ userId: userId, pumpId: pumpId })
+            .sort({ createdAt: -1 })      // OR `.sort({ updatedAt: -1 })` to sort by last modification time
+            .limit(1)
+            .exec(function(error, data) {
+                if (error) {
+                    return reject(error)
+                }
+                return resolve(data)
+            });
+        } catch(error) {
+            console.log(error)
+        }
+    }) 
 }
 
 //wrappers

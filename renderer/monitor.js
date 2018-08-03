@@ -33,7 +33,7 @@ var data = {
   //get local user_id from main process
   let user_id = "0000000000000001"
   //get from ui tab
-  let pump_id = "A1A"
+  let pump_id = "A2A"
   let dataType = DATA_TYPE_SUMARY
   let from = 0000001
   let to =   0000001

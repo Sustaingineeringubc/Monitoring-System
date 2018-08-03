@@ -6,7 +6,7 @@ const datastore = require('../datastore');
 var startByte = 0;
 var initiatedRead = false;
 var lastRead = null;
-var isDataUpdated = false
+var needsUpdate = true
 const fs = require('fs');
 
 const DATA_TYPE_HISTORY = 'DATA_TYPE_HISTORY';
@@ -54,6 +54,7 @@ try {
           }
           try {
               await datastore.storeSensorData(dataObject)
+              needsUpdate = true
             } catch(error) {
               console.log(error)
             }
@@ -62,6 +63,7 @@ try {
           if (!initiatedRead) {
             try {
               await datastore.storeSensorData(lastRead)
+              needsUpdate = true
             } catch(error) {
               console.log(error)
             }
@@ -76,22 +78,25 @@ try {
 }
 
 
-ipcMain.on('is-data-updated', (e, msg) => {
-  return
+ipcMain.on('is-data-updated', async (e, msg) => {
   try { 
+    if (!needsUpdate) {
+      return
+    }
     switch(msg.dataType) {
       case DATA_TYPE_HISTORY:
         setting.to = to;
         setting.from = from;
         break
       case DATA_TYPE_SUMARY:
-        //isDataUpdated = true
-        //get from db
-        //e.sender.send('is-data-updated', {data: lastUpdate})
+        console.log(msg)
+        let data = await datastore.getSummaryData(msg.pump_id)
+        e.sender.send('is-data-updated', {data: data})
         break
       default:
         break;
     }
+    needsUpdate = false
   } catch(error) {
     e.sender.send('is-data-updated', false)
   }
