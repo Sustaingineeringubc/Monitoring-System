@@ -1,11 +1,11 @@
 
-const { ipcMain } = require('electron')
-csv = require('fast-csv')
+const { ipcMain } = require('electron');
+const csv = require('fast-csv');
+const datastore = require('../datastore');
 
 var startByte = 0;
 var initiatedRead = false;
 var lastRead = null;
-var lastUpdate = null;
 var isDataUpdated = false
 const fs = require('fs');
 
@@ -26,7 +26,7 @@ try {
         end: stats.size
       })
         .pipe(csv({headers : false}))
-        .on('data', data => {
+        .on('data', async data => {
           startByte = stats.size;
           if (data.length !== 7) {
             return
@@ -52,13 +52,19 @@ try {
             waterBreaker: data[5],
             pumpId: data[6]
           }
-          lastUpdate = dataObject
-          isDataUpdated = false
+          try {
+              await datastore.storeSensorData(dataObject)
+            } catch(error) {
+              console.log(error)
+            }
         })		
-        .on('end', data => {
+        .on('end', async data => {
           if (!initiatedRead) {
-            lastUpdate = lastRead;
-            isDataUpdated = false
+            try {
+              await datastore.storeSensorData(lastRead)
+            } catch(error) {
+              console.log(error)
+            }
             initiatedRead = true
             return
           }
@@ -71,23 +77,22 @@ try {
 
 
 ipcMain.on('is-data-updated', (e, msg) => {
-    try { 
-      if (isDataUpdated) {
-        return
-       }
-      switch(msg.dataType) {
-        case DATA_TYPE_HISTORY:
-          setting.to = to;
-          setting.from = from;
-          break
-        case DATA_TYPE_SUMARY:
-          isDataUpdated = true
-          e.sender.send('is-data-updated', {data: lastUpdate})
-          break
-        default:
-          break;
-      }
-    } catch(error) {
-      e.sender.send('is-data-updated', false)
+  return
+  try { 
+    switch(msg.dataType) {
+      case DATA_TYPE_HISTORY:
+        setting.to = to;
+        setting.from = from;
+        break
+      case DATA_TYPE_SUMARY:
+        //isDataUpdated = true
+        //get from db
+        //e.sender.send('is-data-updated', {data: lastUpdate})
+        break
+      default:
+        break;
     }
-  })
+  } catch(error) {
+    e.sender.send('is-data-updated', false)
+  }
+})

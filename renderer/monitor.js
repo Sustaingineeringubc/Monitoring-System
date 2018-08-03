@@ -56,7 +56,7 @@ var data = {
       }
         setting.dataType = dataType
         console.log(setting)
-      //  ipcRenderer.send('is-data-updated', dataType)
+        ipcRenderer.send('is-data-updated', setting)
         fetchData()
     }, 1000);
   }

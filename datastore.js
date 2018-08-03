@@ -93,17 +93,35 @@ exports.loginUser = function(email, password, isRemember) {
 }
 
 exports.newUser = function(email, password) {
-    return new Promise((resolve, reject) => {
-        // Document object declaration
-        var uInfoDoc = { 
-            email: email,
-            password: password,
-            created_at: Math.round((new Date()).getTime() / 1000),
-            session: false,
-        };
-        // Insert document into database
-        let newDoc = await insert(uInfoDoc, "userInfo")
-        return resolve();
+    return new Promise(async (resolve, reject) => {
+        try {
+            // Document object declaration
+            var uInfoDoc = { 
+                email: email,
+                password: password,
+                created_at: Math.round((new Date()).getTime() / 1000),
+                session: false,
+            };
+            // Insert document into database
+            let newDoc = await insert(uInfoDoc, "userInfo")
+            return resolve();
+        }catch (error) {
+            console.log(error)
+            return reject(error)
+        }
+    })
+}
+
+exports.storeSensorData = function(data) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            data.createdAt = Math.round(new Date().getTime() / 1000);
+            let newDoc = await insert(data, "dataCollection");
+            return resolve()
+        } catch(error) {
+            console.log(`error: ${error}`);
+            return reject(error);
+        }
     })
 }
 
