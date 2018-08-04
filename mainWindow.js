@@ -38,7 +38,7 @@ ipcMain.on('log-in', async (e, msg) => {
       e.sender.send('log-in', {error:"User already exists"})
       return
     }
-    let win = new BrowserWindow({width: 800, height: 600})
+    let win = new BrowserWindow({width: 1000, height: 800, minWidth: 920, minHeight: 730})
     win.loadURL(`file://${__dirname}/renderer/monitor.html`)
     win.webContents.openDevTools()
     this.win.close()

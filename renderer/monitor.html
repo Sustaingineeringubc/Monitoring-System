@@ -18,57 +18,69 @@
 
 <body>
     <section>
-        <div>
-            <nav class="level is-desktop">
+        <div class="container has-text-centered">
+
+            <div class="container is-flex" style="flex-flow: row wrap;">
+
                 <div class="level-item-left has-text-centered">
                     <div>
                     <p class="heading" id="load-voltage-label">Load Voltage</p>
                     <p class="title" id="load-voltage-value">3,456</p>
                     </div>
                 </div>
+
                 <div class="level-item-center has-text-centered">
                     <div>
                     <p class="heading" id="load-current-label">Load Current</p>
                     <p class="title" id="load-current-value">123</p>
                     </div>
                 </div>
+
                 <div class="level-item-right has-text-centered">
                     <div>
                     <p class="heading" id="power-absorbed-label">Power Absorbed</p>
                     <p class="title" id="power-absorbed-value">456K</p>
                     </div>
                 </div>
-            </nav>
-    
-            <nav class="level is-desktop">
+            </div>
+            <div class="container is-flex" style="flex-flow: row wrap;">
+
                 <div class="level-item-left has-text-centered">
                     <div>
                     <p class="heading" id="operating-temp-label">Operating Temperature</p>
                     <p class="title" id="operating-temp-value">3,456</p>
                     </div>
                 </div>
+                
                 <div class="level-item-center has-text-centered">
                     <div>
                     <p class="heading" id="surface-temp-label">Surface Temperature</p>
                     <p class="title" id="surface-temp-value">123</p>
                     </div>
                 </div>
+
                 <div class="level-item-right has-text-centered">
                     <div>
                     <p class="heading" id="water-breaker-label">Water Breaker</p>
                     <p class="title" id="water-breaker-value">456K</p>
                     </div>
                 </div>
-            </nav>
+            </div>
         </div>
      </section>
-    <section>
-            
-        <div class="ct-chart ct-perfect-fourth"></div>
-                
+
+
+    <section style="height: 680px">
+                    <div class="container has-text-centered" style="height: 365px;">
+                            <div class="ct-chart" id="chart_1" style="height: 345px;"></div>
+                    </div>
+                        <div class="container has-text-centered" style="height: 365px;">
+                                <div class="ct-chart" id="chart_2" style="height: 345px;"></div>
+                        </div>
+                        <div class="container has-text-centered" style="height: 365px;">
+                                <div class="ct-chart" id="chart_3" style="height: 345px;"></div>
+                        </div>
     </section>
-
-
     <!-- Scripts -->
     <script async type="text/javascript" src="../js/bulma.js"></script>
     <script>
@@ -82,3 +94,4 @@
     </script>
 </body>
 </html>
+

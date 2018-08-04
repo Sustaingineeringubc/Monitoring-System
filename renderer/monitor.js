@@ -15,16 +15,16 @@ var data = {
     // Our series array that contains series objects or in this case series data arrays
     series: [ [5, 1, 4, 2, 3],
     [5, 1, 4, 2, 3],
-    [5, 1, 4, 2, 3],
-    [5, 1, 4, 2, 3],
-    [5, 1, 4, 2, 3],
-    [5, 1, 4, 2, 3] ]
+]
   };
   
   // Create a new line chart object where as first parameter we pass in a selector
   // that is resolving to our chart container element. The Second parameter
   // is the actual data object.
-  let chart = new Chartist.Line('.ct-chart', data);
+  let chart_1 = new Chartist.Line('#chart_1', data);
+  let chart_2 = new Chartist.Line('#chart_2', data);
+  let chart_3 = new Chartist.Line('#chart_3', data);
+
   
   let load_voltage_value = $('#load-voltage-value');
   let load_current_value = $('#load-current-value');

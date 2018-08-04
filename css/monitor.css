@@ -33,3 +33,17 @@ body {
   width: 32%;
 }
 
+.title {
+  color: #363636;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.125;
+}
+
+.heading {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}

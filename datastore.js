@@ -175,15 +175,15 @@ exports.getRealTime = function(data)  {
                 let opTempList = new Array();
                 let suTempList = new Array();
                 let waterBreakerList = new Array();
-
-                _.forEach(data, doc => {
-                    voltageList.push(doc.voltage)
-                    currentList.push(doc.current)
-                    powerList.push(doc.power)
-                    opTempList.push(doc.opTemp)
-                    suTempList.push(doc.suTemp)
-                    waterBreakerList.push(doc.waterBreaker)
-                })
+                console.log('da',data)
+                for (i = data.length - 1; i >= 0; i--) {
+                    voltageList.push(data[i].voltage)
+                    currentList.push(data[i].current)
+                    powerList.push(data[i].power)
+                    opTempList.push(data[i].opTemp)
+                    suTempList.push(data[i].suTemp)
+                    waterBreakerList.push(data[i].waterBreaker)
+                }
                 let response =  [
                     voltageList,
                     currentList,
@@ -192,6 +192,7 @@ exports.getRealTime = function(data)  {
                     suTempList,
                     waterBreakerList
                 ]
+                console.log('r',response)
                 return resolve(response)
             });
         } catch(error) {
