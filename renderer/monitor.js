@@ -13,9 +13,8 @@ var data = {
     // A labels array that can contain any sort of values
     labels: ['5', '4', '3', '2', '1'],
     // Our series array that contains series objects or in this case series data arrays
-    series: [ [5, 1, 4, 2, 3],
-    [5, 1, 4, 2, 3],
-]
+    series: [ [1, 6, 2, 6, 3],
+    [5, 0, 4, 1, 4] ]
   };
   
   // Create a new line chart object where as first parameter we pass in a selector

@@ -23,9 +23,11 @@
   },
   "homepage": "https://github.com/electron/electron-quick-start#readme",
   "devDependencies": {
+    "bulma": "^0.7.1",
     "devtron": "*",
     "electron": "*",
-    "electron-reload": "*"
+    "electron-reload": "*",
+    "node-sass": "^4.9.2"
   },
   "dependencies": {
     "async": "^2.6.1",
