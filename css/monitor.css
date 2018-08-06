@@ -2,6 +2,18 @@
     background: #F2F6FA;
 }
 
+.borderlist {
+  list-style-position:inside;
+  border-bottom: 1px;
+  border-bottom-color: black;
+}
+
+.borderlist a {
+  padding-top: 25px}
+
+
+
+
 .border-test {
     border-style: solid;
     border-color: blue;
