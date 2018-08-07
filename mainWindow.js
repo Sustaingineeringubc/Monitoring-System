@@ -59,7 +59,6 @@ var checkActiveSession = async function(currentWin) {
   let win = new BrowserWindow({width: 1000, height: 800, minWidth: 920, minHeight: 730})
   win.loadURL(`file://${__dirname}/renderer/monitor.html`)
   win.webContents.openDevTools()
-  console.log('cloing', currentWin)
   currentWin.close()
   this.win = win
 }

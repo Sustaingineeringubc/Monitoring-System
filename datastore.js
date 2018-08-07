@@ -48,9 +48,7 @@ exports.expireSessions = function() {
     return new Promise( async(resolve, reject) => {
         try {
             let currentTime = Math.round((new Date()).getTime() / 1000);
-            console.log('going to expire', currentTime)
             let activeSession = await update({ session: true, session_expire: { $lte: currentTime}}, { $set: { session: false } }, { multi: true }, 'userSettings')
-            console.log('seees exp', activeSession);
             if (activeSession.length === 0 ) {
                 return resolve();
             }
@@ -65,15 +63,13 @@ exports.restoreSession = function(userId) {
     return new Promise(async (resolve, reject) => {
         try {
             let activeSession = await find({ session: true }, 'userSettings')
-            console.log('11111', activeSession)
             if (activeSession.length === 0) {
                 return resolve(false)
             }
             user_id = activeSession[0].userId
-            console.log('accct', activeSession)
             return resolve(true)
         } catch(error) {
-
+            return reject(error)
         } 
     })
 }
@@ -90,7 +86,6 @@ exports.loginUser = function(email, password, isRemember) {
             }
             user_id = user[0]._id
 
-            console.log(user_id, isRemember)
             const setting = await find({ userId: user_id}, 'userSettings')
             const uSettDoc = {
                 userId: user[0]._id,
@@ -102,14 +97,12 @@ exports.loginUser = function(email, password, isRemember) {
                 uSettDoc.created_at = Math.round((new Date()).getTime() / 1000);
 
                 db.userSettings.insert(uSettDoc, (error, newDoc)=> {
-                    console.log(newDoc, error)
                     if (error) {
                         return reject(error)
                     }
                     return resolve(true);
                 });
             } else {
-                console.log('update');
                 uSettDoc.updated_at = Math.round((new Date()).getTime() / 1000);
 
                 db.userSettings.update(setting[0], uSettDoc, {}, (error, settingReplaced) => {
@@ -166,7 +159,6 @@ exports.getSummaryData = function(pumpId) {
         try {
             let userId = user_id;
             var db = new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true  });
-            console.log('find', userId, pumpId)
             db
             .findOne({ userId: userId, pumpId: pumpId })
             .sort({ createdAt: -1 })      // OR `.sort({ updatedAt: -1 })` to sort by last modification time
@@ -206,7 +198,6 @@ exports.getRealTime = function(data)  {
                 let opTempList = new Array();
                 let suTempList = new Array();
                 let waterBreakerList = new Array();
-                console.log('da',data)
                 for (i = data.length - 1; i >= 0; i--) {
                     voltageList.push(data[i].voltage)
                     currentList.push(data[i].current)
@@ -223,7 +214,6 @@ exports.getRealTime = function(data)  {
                     suTempList,
                     waterBreakerList
                 ]
-                console.log('r',response)
                 return resolve(response)
             });
         } catch(error) {
@@ -277,10 +267,8 @@ var update = exports.update = function(query, updateModifier, options, tableName
 var remove = exports.remove = function (query, options, tableName) {
     return new Promise ((resolve,reject) => {
         var db = {};
-        console.log('remove', query, options, tableName)
         db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
         db.schema.remove(query, options, (error, numRemoved) => {
-            console.log('res', error, numRemoved)
             if (error) {
                 return reject(error)
             }
