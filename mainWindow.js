@@ -50,6 +50,20 @@ ipcMain.on('log-in', async (e, msg) => {
   }
 })
 
+var checkActiveSession = async function(currentWin) {
+  await datastore.expireSessions();
+  let activeSession = await datastore.restoreSession();
+  if (!activeSession) {
+    return
+  }
+  let win = new BrowserWindow({width: 1000, height: 800, minWidth: 920, minHeight: 730})
+  win.loadURL(`file://${__dirname}/renderer/monitor.html`)
+  win.webContents.openDevTools()
+  console.log('cloing', currentWin)
+  currentWin.close()
+  this.win = win
+}
+
 // mainWindow createWindow fn
 exports.createWindow = () => {
 
@@ -73,6 +87,7 @@ exports.createWindow = () => {
     loadingState = "Initializing Local Datastore.."
     await datastore.initializeDataStore()
     loadingState = "Local Datastore initialized.."
+    checkActiveSession(this.win);
    // updateLoadingState('Initializing datastore')
   })  
   // Handle window closed

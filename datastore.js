@@ -14,7 +14,6 @@ var initializeDataStore = exports.initializeDataStore = () => {
             if (docs.length !== 0) {
                 return resolve();
             }
-            db.userSettings = new Datastore({ filename: `${__dirname}/datastore/local/userSettings`, autoload: true });
             db.dataCollection = new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true });
             var doc = { 
                         _id: '0000000000000001'
@@ -45,17 +44,40 @@ exports.findUser = function(email) {
     })
 }
 
-exports.createSession = function(userId) {
-    db.userInfo.find({ email: email }, (error, docs) => {
-        if (error) {
+exports.expireSessions = function() {
+    return new Promise( async(resolve, reject) => {
+        try {
+            let currentTime = Math.round((new Date()).getTime() / 1000);
+            console.log('going to expire', currentTime)
+            let activeSession = await update({ session: true, session_expire: { $lte: currentTime}}, { $set: { session: false } }, { multi: true }, 'userSettings')
+            console.log('seees exp', activeSession);
+            if (activeSession.length === 0 ) {
+                return resolve();
+            }
+            return resolve();
+        } catch(error) {
             return reject(error)
         }
-        if (docs.length === 0) {
-            return resolve(false)
-        }
-        return resolve(true);
     })
 }
+
+exports.restoreSession = function(userId) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let activeSession = await find({ session: true }, 'userSettings')
+            console.log('11111', activeSession)
+            if (activeSession.length === 0) {
+                return resolve(false)
+            }
+            user_id = activeSession[0].userId
+            console.log('accct', activeSession)
+            return resolve(true)
+        } catch(error) {
+
+        } 
+    })
+}
+
 
 exports.loginUser = function(email, password, isRemember) {
     return new Promise(async (resolve, reject) => {
@@ -67,20 +89,30 @@ exports.loginUser = function(email, password, isRemember) {
                 return reject('Incorrect email or password')
             }
             user_id = user[0]._id
-            const setting = await find({ userId: user.Id}, 'userSettings')
+
+            console.log(user_id, isRemember)
+            const setting = await find({ userId: user_id}, 'userSettings')
             const uSettDoc = {
                 userId: user[0]._id,
-                isRemembered: isRemember
+                isRemembered: isRemember,
+                session: true,
+                session_expire: Math.round((new Date()).getTime() / 1000) + 86400
             }
             if (setting.length === 0) {
+                uSettDoc.created_at = Math.round((new Date()).getTime() / 1000);
+
                 db.userSettings.insert(uSettDoc, (error, newDoc)=> {
+                    console.log(newDoc, error)
                     if (error) {
                         return reject(error)
                     }
                     return resolve(true);
                 });
             } else {
-                db.userSettings.update(setting, uSettDoc, {}, (error, settingReplaced) => {
+                console.log('update');
+                uSettDoc.updated_at = Math.round((new Date()).getTime() / 1000);
+
+                db.userSettings.update(setting[0], uSettDoc, {}, (error, settingReplaced) => {
                     if (error) {
                         return reject(error)
                     }
@@ -104,7 +136,6 @@ exports.newUser = function(email, password) {
                 email: email,
                 password: password,
                 created_at: Math.round((new Date()).getTime() / 1000),
-                session: false,
             };
             // Insert document into database
             let newDoc = await insert(uInfoDoc, "userInfo")
@@ -230,11 +261,11 @@ var insert = exports.insert = function(object, tableName) {
     })
 }
 
-var update = exports.update = function(object, query, updateModifier, options, tableName) {
+var update = exports.update = function(query, updateModifier, options, tableName) {
     return new Promise ((resolve,reject) => {
         var db = {};
         db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-        db.schema.update(object, query, updateModifier, options, (error, settingReplaced, affectedDocuments, upsert) => {
+        db.schema.update(query, updateModifier, options, (error, settingReplaced, affectedDocuments, upsert) => {
             if (error) {
                 return reject(error)
             }
@@ -243,11 +274,13 @@ var update = exports.update = function(object, query, updateModifier, options, t
     })
 }
 
-var remove = exports.remove = function (object, query, options, tableName) {
+var remove = exports.remove = function (query, options, tableName) {
     return new Promise ((resolve,reject) => {
         var db = {};
+        console.log('remove', query, options, tableName)
         db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-        db.schema.remove(object, query, options, (error, numRemoved) => {
+        db.schema.remove(query, options, (error, numRemoved) => {
+            console.log('res', error, numRemoved)
             if (error) {
                 return reject(error)
             }
