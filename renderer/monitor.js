@@ -57,7 +57,6 @@ var data = {
           break;
       }
         setting.dataType = dataType
-        console.log(setting)
         ipcRenderer.send('is-data-updated', setting)
         fetchData()
     }, 1000);
@@ -71,7 +70,6 @@ var data = {
       return
     }
     data.series = msg.data
-    console.log('updating', msg.data)
     chart.update(data)
   })
 

@@ -96,7 +96,6 @@ ipcMain.on('is-data-updated', async (e, msg) => {
         break
       case DATA_TYPE_REAL_TIME:
         data = await datastore.getRealTime({pumpId: msg.pump_id})
-        console.log('sending', {data: data})
         e.sender.send('is-data-updated', {data: data})
         break
       default:
