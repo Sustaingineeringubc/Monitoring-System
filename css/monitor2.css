@@ -3740,11 +3740,11 @@ a.dropdown-item {
     display: block;
     padding: 0.5em 0.75em; }
     .menu-list a:hover {
-      background-color: white;
+      background-color: rgb(190,190,190);
       color: #363636; }
     .menu-list a.is-active {
-      background-color: #3273dc;
-      color: #fff; }
+      background-color: rgb(190,190,190);
+      color: #4a4a4a; }
   .menu-list li ul {
     border-left: 1px solid #dbdbdb;
     margin: 0.75em;
