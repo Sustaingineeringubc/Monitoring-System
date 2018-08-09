@@ -1,7 +1,8 @@
 var Datastore = require('nedb')
 var _ = require('lodash');
 
-var user_id = exports.user_id - null
+var user_id = exports.user_id = null
+var user_sensors = {};
 
 var initializeDataStore = exports.initializeDataStore = () => {
     return new Promise((resolve, reject) => {
@@ -41,6 +42,16 @@ exports.findUser = function(email) {
             }
             return resolve(true);
         })
+    })
+}
+
+exports.getUserSensors = function(userId) {
+    return new Promise((resolve, reject) => {
+        try{
+
+        } catch(error) {
+
+        }
     })
 }
 
@@ -146,12 +157,17 @@ exports.storeSensorData = function(data) {
             data.createdAt = Math.round(new Date().getTime() / 1000);
             data.userId = user_id;
             let newDoc = await insert(data, "dataCollection");
+
             return resolve()
         } catch(error) {
             console.log(`error: ${error}`);
             return reject(error);
         }
     })
+}
+
+var addSensor = exports.addSensor = function(sensorId) {
+
 }
 
 exports.getSummaryData = function(pumpId) {
