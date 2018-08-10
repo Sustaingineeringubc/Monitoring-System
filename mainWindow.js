@@ -63,13 +63,9 @@ var checkActiveSession = async function(currentWin) {
 }
 
 // mainWindow createWindow fn
-exports.createWindow = () => {
+exports.createWindow = (mainWindow) => {
 
-  this.win = new BrowserWindow({
-    height: 700,
-    width: 900,
-    show: false
-  })
+  this.win = mainWindow
 
   // Create full size app
   //this.win.maximize();
@@ -92,6 +88,7 @@ exports.createWindow = () => {
   this.win.on('closed', () => {
     this.win = null
   })
+  return this.win;
 }
 
 

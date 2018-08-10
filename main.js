@@ -7,6 +7,8 @@ ipcMain.on('app-loaded', (e, itemURL) => {
   mainWindow.loadPage('login.html')
 })
 
+let windows = {};
+
 // Enable Electron-Reload
 //require('electron-reload')(__dirname)
 
@@ -25,5 +27,24 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) mainWindow.createWindow()
+  if (mainWindow !== null) { return }
 })
+
+var createWindow = (window) => {
+  switch(window) {
+    case 'main':
+      let mainWindow = new BrowserWindows({
+        width: 1000, 
+        height: 800, 
+        minWidth: 920, 
+        minHeight: 730
+      })
+      windows.mainWindow = mainWindow;
+      mainWindow.createWindow(mainWindow);
+      break;
+    case 'monitor':
+      break;
+    case 'user_menu':
+      break;
+  }
+}
