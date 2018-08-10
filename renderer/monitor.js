@@ -101,31 +101,31 @@ navBar.on("click", function() {
   $(this).addClass("is-active");
 
   if(target === ("Real-Time")) {
-    $(".realTime").removeClass("hidden");
-    $(".history").addClass("hidden");
-    $(".summary").addClass("hidden");
-    $(".settings").addClass("hidden");
+    $(".history").hide();
+    $(".summary").hide();
+    $(".settings").hide();
+    $(".realTime").show("slow");
   } 
 
   if(target === ("History")) {
-    $(".realTime").addClass("hidden");
-    $(".history").removeClass("hidden");
-    $(".summary").addClass("hidden");
-    $(".settings").addClass("hidden");
+    $(".realTime").hide("slow");
+    $(".summary").hide();
+    $(".settings").hide();
+    $(".history").show("slow");
   } 
 
   if(target === ("Summary")) {
-    $(".realTime").addClass("hidden");
-    $(".history").addClass("hidden");
-    $(".summary").removeClass("hidden");
-    $(".settings").addClass("hidden");
+    $(".realTime").hide("slow");
+    $(".history").hide();
+    $(".settings").hide();
+    $(".summary").show("slow");
   } 
 
   if(target === ("Settings")) {
-    $(".realTime").addClass("hidden");
-    $(".history").addClass("hidden");
-    $(".summary").addClass("hidden");
-    $(".settings").removeClass("hidden");
+    $(".realTime").hide('slow');
+    $(".history").hide();
+    $(".summary").hide();
+    $(".settings").show("slow");
   } 
 
 });

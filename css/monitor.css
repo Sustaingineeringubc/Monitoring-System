@@ -72,13 +72,13 @@ body {
   text-transform: uppercase;
 }
 
-.pane {
+/* .pane {
   border: 2px solid black;
 }
 
 .hero {
   border: 2px solid black;
-}
+} */
 
 .visible {
   display: block;
