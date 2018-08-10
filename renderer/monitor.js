@@ -92,11 +92,55 @@ var data = {
 
 //jQuery Addition
 
-var navBar = $( 'ul#navBar li' );
+var navBar = $('ul#navBar li');
 
 navBar.on("click", function() {
+  var target = $(this).text();
+
   $(this).parent().find( 'li.is-active' ).removeClass( 'is-active' );
   $(this).addClass("is-active");
+
+  if(target === ("Real-Time")) {
+    alert(target);
+    $(".realTime").removeClass("hidden");
+    $(".history").addClass("hidden");
+    $(".summary").addClass("hidden");
+    $(".settings").addClass("hidden");
+  } 
+
+  if(target === ("History")) {
+    alert(target);
+    $(".realTime").addClass("hidden");
+    $(".history").removeClass("hidden");
+    $(".summary").addClass("hidden");
+    $(".settings").addClass("hidden");
+
+    $(".history").addClass("visible");
+  } 
+
+  if(target === ("Summary")) {
+    alert(target);
+    $(".realTime").addClass("hidden");
+    $(".history").removeClass("hidden");
+    $(".summary").addClass("hidden");
+    $(".settings").addClass("hidden");
+
+    $(".history").addClass("visible");
+  } 
+
+  if(target === ("Settings")) {
+    alert(target);
+    $(".realTime").addClass("hidden");
+    $(".history").removeClass("hidden");
+    $(".summary").addClass("hidden");
+    $(".settings").addClass("hidden");
+
+    $(".history").addClass("visible");
+  } 
+
 });
+
+var realTime = $(".realTime");
+
 
 

@@ -80,6 +80,11 @@ body {
   border: 2px solid black;
 }
 
-.activated{
-  bordeR: 2px solid black;
+.visible {
+  display: block;
 }
+
+.hidden {
+  display: none;
+}
+

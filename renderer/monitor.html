@@ -100,14 +100,15 @@
             <!-- Right-Block Navbar -->
             <div class="tabs is-boxed is-centered" style="margin-top: 50px; margin-bottom: 50px;">
                 <ul id="navBar">
-                    <li><a>Real-Time</a></li>
-                    <li><a>History</a></li>
-                    <li><a>Summary</a></li>
-                    <li><a>Settings</a></li>
+                    <li id="realTimeID"><a>Real-Time</a></li>
+                    <li id="historyID"><a>History</a></li>
+                    <li id="summaryID"><a>Summary</a></li>
+                    <li id="settingsID"><a>Settings</a></li>
                 </ul>
             </div>
             <!-- Graphs -->
-            <section class="hero">
+            <!-- Real-Time Graph -->
+            <section class="hero realTime">
                 <section class="hero">
                     <div class="hero-body">
                         <div class="container has-text-centered" style="height: 365px;">
@@ -130,13 +131,15 @@
                     </div>
                 </section>
             </section>
-            <section class="hero">
-                <div class="hero-body">
-                    <div class="container has-text-centered">
-                        <p>a</p>
-                    </div>
-                </div>
-            </section>
+        </section>
+        <section class="hero history hidden">
+            <p>History</p>
+        </section>
+        <section class="hero summary hidden">
+            <p>Summary</p>
+        </section>
+        <section class="hero settings hidden">
+            <p>Settings</p>
         </section>
     </section>
     <!-- Scripts -->
