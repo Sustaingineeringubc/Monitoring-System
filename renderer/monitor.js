@@ -101,7 +101,6 @@ navBar.on("click", function() {
   $(this).addClass("is-active");
 
   if(target === ("Real-Time")) {
-    alert(target);
     $(".realTime").removeClass("hidden");
     $(".history").addClass("hidden");
     $(".summary").addClass("hidden");
@@ -109,33 +108,24 @@ navBar.on("click", function() {
   } 
 
   if(target === ("History")) {
-    alert(target);
     $(".realTime").addClass("hidden");
     $(".history").removeClass("hidden");
     $(".summary").addClass("hidden");
     $(".settings").addClass("hidden");
-
-    $(".history").addClass("visible");
   } 
 
   if(target === ("Summary")) {
-    alert(target);
     $(".realTime").addClass("hidden");
-    $(".history").removeClass("hidden");
-    $(".summary").addClass("hidden");
+    $(".history").addClass("hidden");
+    $(".summary").removeClass("hidden");
     $(".settings").addClass("hidden");
-
-    $(".history").addClass("visible");
   } 
 
   if(target === ("Settings")) {
-    alert(target);
     $(".realTime").addClass("hidden");
-    $(".history").removeClass("hidden");
+    $(".history").addClass("hidden");
     $(".summary").addClass("hidden");
-    $(".settings").addClass("hidden");
-
-    $(".history").addClass("visible");
+    $(".settings").removeClass("hidden");
   } 
 
 });
