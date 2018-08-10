@@ -10,13 +10,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <!-- Bulma Version 0.7.1-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" />
     <link rel="stylesheet" href="../css/photon.css">
     <link rel="stylesheet" href="../css/monitor2.css">
     <link rel="stylesheet" type="text/css" href="../css/monitor.css">
 
     <link rel="stylesheet" href="../bower_components/chartist/dist/chartist.css">
-    <script src="../bower_components/chartist/dist/chartist.js"></script>
 </head>
 
 <body>
@@ -50,6 +49,7 @@
         </section>
         <!-- Top Right Block -->
         <section class="pane">
+            <!-- Displayed Values -->
             <section class="hero">
                 <div class="hero-body">
                     <div class="container has-text-centered">
@@ -97,20 +97,16 @@
                     </div>
                 </div>
             </section>
-            <section class="hero">
-                <div class="hero-body">
-                    <div class="container">
-                        <div class="tabs is-centered">
-                            <ul>
-                                <li class="is-active"><a>Real-Time</a></li>
-                                <li><a>History</a></li>
-                                <li><a>Summary</a></li>
-                                <li><a>Settings</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <!-- Right-Block Navbar -->
+            <div class="tabs is-boxed is-centered" style="margin-top: 50px; margin-bottom: 50px;">
+                <ul id="navBar">
+                    <li><a>Real-Time</a></li>
+                    <li><a>History</a></li>
+                    <li><a>Summary</a></li>
+                    <li><a>Settings</a></li>
+                </ul>
+            </div>
+            <!-- Graphs -->
             <section class="hero">
                 <section class="hero">
                     <div class="hero-body">
@@ -144,12 +140,12 @@
         </section>
     </section>
     <!-- Scripts -->
-    <script async type="text/javascript" src="../js/bulma.js"></script>
+    <script src="../bower_components/chartist/dist/chartist.js"></script>
     <script>
         // jQuery
-        $ = require('jquery')
+        window.$ = window.jQuery = require("jquery");
         // Main app script
-        require('./monitor')
+        require('./monitor.js');
     </script>
 </body>
 </html>
