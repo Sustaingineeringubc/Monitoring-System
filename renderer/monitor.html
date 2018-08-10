@@ -50,74 +50,96 @@
         </section>
         <!-- Top Right Block -->
         <section class="pane">
-            <section class="pane">
-                <div class="container has-text-centered">
-                    <div class="container is-flex" style="flex-flow: row wrap; margin-top: 15px;">
-                        <div class="level-item-left has-text-centered">
-                            <div>
-                                <p class="heading" id="load-voltage-label">Load Voltage</p>
-                                <p class="title" id="load-voltage-value">3,456</p>
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container has-text-centered">
+                        <div class="container is-flex" style="flex-flow: row wrap; margin-top: 15px;">
+                            <div class="level-item-left has-text-centered">
+                                <div>
+                                    <p class="heading" id="load-voltage-label">Load Voltage</p>
+                                    <p class="title" id="load-voltage-value">3,456</p>
+                                </div>
+                            </div>
+                            <div class="level-item-center has-text-centered">
+                                <div>
+                                    <p class="heading" id="load-current-label">Load Current</p>
+                                    <p class="title" id="load-current-value">123</p>
+                                </div>    
+                            </div>
+                            <div class="level-item-right has-text-centered">
+                                <div>
+                                    <p class="heading" id="power-absorbed-label">Power Absorbed</p>
+                                    <p class="title" id="power-absorbed-value">456K</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="level-item-center has-text-centered">
-                            <div>
-                                <p class="heading" id="load-current-label">Load Current</p>
-                                <p class="title" id="load-current-value">123</p>
-                            </div>    
-                        </div>
-                        <div class="level-item-right has-text-centered">
-                            <div>
-                                <p class="heading" id="power-absorbed-label">Power Absorbed</p>
-                                <p class="title" id="power-absorbed-value">456K</p>
+                        <div class="container is-flex" style="flex-flow: row wrap; margin-top: 25px;">
+                            <div class="level-item-left has-text-centered">
+                                <div>
+                                <p class="heading" id="operating-temp-label">Operating Temperature</p>
+                                <p class="title" id="operating-temp-value">3,456</p>
+                                </div>
+                            </div>
+                            <div class="level-item-center has-text-centered">
+                                <div>
+                                <p class="heading" id="surface-temp-label">Surface Temperature</p>
+                                <p class="title" id="surface-temp-value">123</p>
+                                </div>
+                            </div>
+                
+                            <div class="level-item-right has-text-centered">
+                                <div>
+                                <p class="heading" id="water-breaker-label">Water Breaker</p>
+                                <p class="title" id="water-breaker-value">456K</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="container is-flex" style="flex-flow: row wrap; margin-top: 25px;">
-                        <div class="level-item-left has-text-centered">
-                            <div>
-                            <p class="heading" id="operating-temp-label">Operating Temperature</p>
-                            <p class="title" id="operating-temp-value">3,456</p>
-                            </div>
-                        </div>
-                        <div class="level-item-center has-text-centered">
-                            <div>
-                            <p class="heading" id="surface-temp-label">Surface Temperature</p>
-                            <p class="title" id="surface-temp-value">123</p>
-                            </div>
-                        </div>
-            
-                        <div class="level-item-right has-text-centered">
-                            <div>
-                            <p class="heading" id="water-breaker-label">Water Breaker</p>
-                            <p class="title" id="water-breaker-value">456K</p>
-                            </div>
+                </div>
+            </section>
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container">
+                        <div class="tabs is-centered">
+                            <ul>
+                                <li class="is-active"><a>Real-Time</a></li>
+                                <li><a>History</a></li>
+                                <li><a>Summary</a></li>
+                                <li><a>Settings</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="pane">
-                <div class="tabs is-centered" style="margin-top: 50px;">
-                    <ul>
-                        <li class="is-active"><a>Real-Time</a></li>
-                        <li><a>History</a></li>
-                        <li><a>Summary</a></li>
-                        <li><a>Settings</a></li>
-                    </ul>
-                </div>
+            <section class="hero">
+                <section class="hero">
+                    <div class="hero-body">
+                        <div class="container has-text-centered" style="height: 365px;">
+                            <div class="ct-chart" id="chart_1" style="height: 345px;"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="hero">
+                    <div class="hero-body">
+                        <div class="container has-text-centered" style="height: 365px;">
+                            <div class="ct-chart" id="chart_2" style="height: 345px;"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="hero">
+                    <div class="hero-body">
+                        <div class="container has-text-centered" style="height: 365px;">
+                            <div class="ct-chart" id="chart_3" style="height: 345px;"></div>
+                        </div>
+                    </div>
+                </section>
             </section>
-            <section class="pane" style="height: 680px">
-                <div class="container has-text-centered" style="height: 365px;">
-                    <div class="ct-chart" id="chart_1" style="height: 345px;"></div>
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container has-text-centered">
+                        <p>a</p>
+                    </div>
                 </div>
-                <div class="container has-text-centered" style="height: 365px;">
-                    <div class="ct-chart" id="chart_2" style="height: 345px;"></div>
-                </div>
-                <div class="container has-text-centered" style="height: 365px;">
-                    <div class="ct-chart" id="chart_3" style="height: 345px;"></div>
-                </div>
-            </section>
-            <section class="pane">
-                <p>a</p>
             </section>
         </section>
     </section>
