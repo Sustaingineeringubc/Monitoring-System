@@ -15,10 +15,10 @@ exports.createWindow = (monitorWindow) => {
 
 
     // Create full size app
-    //this.win.maximize();
+    this.win.maximize();
 
     // Devtools
-    //this.win.webContents.openDevTools()
+    this.win.webContents.openDevTools()
 
     this.win.once('ready-to-show', async () => {
         this.win.show()

@@ -10,18 +10,65 @@ const DATA_TYPE_STATS = 'DATA_TYPE_STATS';
 
 
 var data = {
-    // A labels array that can contain any sort of values
-    labels: ['5', '4', '3', '2', '1'],
-    // Our series array that contains series objects or in this case series data arrays
-    series: []
+    realtimeData: {
+      graph_1:{
+        // A labels array that can contain any sort of values
+        labels: ['5', '4', '3', '2', '1'],
+        // Our series array that contains series objects or in this case series data arrays
+        series: []
+      },
+      graph_2:{
+        // A labels array that can contain any sort of values
+        labels: ['5', '4', '3', '2', '1'],
+        // Our series array that contains series objects or in this case series data arrays
+        series: []
+      },
+      graph_3:{
+        // A labels array that can contain any sort of values
+        labels: ['5', '4', '3', '2', '1'],
+        // Our series array that contains series objects or in this case series data arrays
+        series: []
+      }
+    },
+    historyData: {
+      graph_1:{
+        // A labels array that can contain any sort of values
+        labels: ['5', '4', '3', '2', '1'],
+        // Our series array that contains series objects or in this case series data arrays
+        series: []
+      },
+      graph_2:{
+        // A labels array that can contain any sort of values
+        labels: ['5', '4', '3', '2', '1'],
+        // Our series array that contains series objects or in this case series data arrays
+        series: []
+      },
+      graph_3:{
+        // A labels array that can contain any sort of values
+        labels: ['5', '4', '3', '2', '1'],
+        // Our series array that contains series objects or in this case series data arrays
+        series: []
+      }
+    },
+    labelData: {
+      voltage: "",
+      current: "",
+      oTemp: "",
+      sTemp: "",
+      power: "",
+      water:""
+    }
   };
   
   // Create a new line chart object where as first parameter we pass in a selector
   // that is resolving to our chart container element. The Second parameter
   // is the actual data object.
-  let chart_1 = new Chartist.Line('#chart_1', data);
-  let chart_2 = new Chartist.Line('#chart_2', data);
-  let chart_3 = new Chartist.Line('#chart_3', data);
+  let realtimeChart1 = new Chartist.Line('#chart_1', data.realtimeData.graph_1);
+  let realtimeChart2 = new Chartist.Line('#chart_2', data.realtimeData.graph_2);
+  let realtimeChart3 = new Chartist.Line('#chart_3', data.realtimeData.graph_3);
+  let historyChart4 = new Chartist.Line('#chart_4', data.historyData.graph_1);
+  let historyChart5 = new Chartist.Line('#chart_5', data.historyData.graph_2);
+  let historyChart6 = new Chartist.Line('#chart_6', data.historyData.graph_3);
 
   
   let load_voltage_value = $('#load-voltage-value');
@@ -68,10 +115,38 @@ var data = {
     if (!msg.data) {
       return
     }
-    data.series = msg.data
-    chart_1.update(data)
-    chart_2.update(data)
-    chart_3.update(data)
+
+  
+    let voltageData = msg.data[0];
+    let currentData = msg.data[1];
+    let oTempData = msg.data[2];
+    let sTempData = msg.data[3];
+    let powerTemp = msg.data[4];
+    let waterTemp = msg.data[5];
+    
+    console.log(voltageData)
+
+    data.realtimeData.graph_1.series = [voltageData, currentData]
+    data.realtimeData.graph_2.series = [oTempData, sTempData]
+    data.realtimeData.graph_3.series = [powerTemp, waterTemp]
+
+    data.labelData.voltage = voltageData[4]
+    data.labelData.current = currentData[4]
+    data.labelData.oTemp = oTempData[4]
+    data.labelData.sTemp = sTempData[4]
+    data.labelData.power = powerTemp[4]
+    data.labelData.water = waterTemp[4]
+    realtimeChart1.update(data.realtimeData.graph_1);
+    realtimeChart2.update(data.realtimeData.graph_2);
+    realtimeChart3.update(data.realtimeData.graph_3);
+
+    load_voltage_value.text(data.labelData.voltage)
+    load_current_value.text(data.labelData.current)
+    power_absorbed_value.text(data.labelData.power)
+    operating_temp_value.text(data.labelData.oTemp)
+    surface_temp_value.text(data.labelData.sTemp)
+    water_breaker_value.text(data.labelData.water)
+
 
   })
 
@@ -114,6 +189,11 @@ navBar.on("click", function() {
     $(".summary").hide();
     $(".settings").hide();
     $(".realTime").show("slow");
+    setTimeout(() => {
+      realtimeChart1.update(data.realtimeData.graph_1);
+      realtimeChart2.update(data.realtimeData.graph_2);
+      realtimeChart3.update(data.realtimeData.graph_3);
+    }, 500)
   } 
 
   if(target === ("History")) {
@@ -121,6 +201,9 @@ navBar.on("click", function() {
     $(".summary").hide();
     $(".settings").hide();
     $(".history").show("slow");
+    historyChart4.update(data.historyData.graph_1)
+    historyChart5.update(data.historyData.graph_2)
+    historyChart6.update(data.historyData.graph_3)
   } 
 
   if(target === ("Summary")) {

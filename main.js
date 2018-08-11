@@ -5,18 +5,15 @@ const mainWindow = require('./mainWindow');
 const monitorWindow = require('./monitorWindow.js');
 const datastore = require('./datastore');
 
-ipcMain.on('app-loaded', (e, itemURL) => {
-  createWindow('monitor');
-})
-
-
 var checkActiveSession = async function(currentWin) {
   await datastore.expireSessions();
   let activeSession = await datastore.restoreSession();
+  console.log(activeSession)
   if (!activeSession) {
-    return
+    return false
   }
   createWindow('monitor');
+  return true
 }
 
 
@@ -25,9 +22,15 @@ let windows = {};
 // Enable Electron-Reload
 //require('electron-reload')(__dirname)
 
-app.on('ready', () => {
+app.on('ready', async () => {
     createWindow('main')
-    checkActiveSession(windows.mainWindow)
+    let activeSession = await checkActiveSession(windows.mainWindow)
+    if (!activeSession) {
+      console.log('settign timeout')
+      setTimeout(() => {
+      mainWindow.loadPage('login.html')
+      }, 3000)
+    }
 });
 
 // Quit when all windows are closed.
