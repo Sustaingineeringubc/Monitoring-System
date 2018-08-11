@@ -10,132 +10,145 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <!-- Bulma Version 0.7.1-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" />
     <link rel="stylesheet" href="../css/photon.css">
     <link rel="stylesheet" href="../css/monitor2.css">
     <link rel="stylesheet" type="text/css" href="../css/monitor.css">
 
     <link rel="stylesheet" href="../bower_components/chartist/dist/chartist.css">
-    <script src="../bower_components/chartist/dist/chartist.js"></script>
 </head>
 
 <body>
-
-    <div class="pane-group">
-            <div class="pane pane-sm sidebar" style="max-width: 160px; min-width: 160px; height: 100%;">
-                <nav class="nav-group">
-                    <aside class="menu">
-                            <ul class="menu-list" id"user-menu"=>
-                                <li class="borderlist">
-                                    <span class="icon" id="user-icon">
-                                        <i class="fa fa-user"></i>                                      
-                                    </span>
-                                        <a id="user-list">Felipe Ballesteros</a>
-                                </li>
-                                <li>
-                                    <a id="sensors-button">Sensors</a>
-                                    <div class="menu-panel">
-                                        <ul style="width: 100%; padding: 0px">
-                                        <li><a>A1A</a></li>
-                                        <li><a>A2A</a></li>
-                                        <li><a>A1B</a></li>
-                                        </ul>
-                                    </div>
-                                    </li>
-                                    <li><a>Customers</a></li>
-                            </ul>   
-                            </aside>
-                </nav>
-            </div>
-    
-            <div class="pane">
-                    <section>
-                            <div class="container has-text-centered">
-                    
-                                <div class="container is-flex" style="flex-flow: row wrap; margin-top: 15px;">
-                    
-                                    <div class="level-item-left has-text-centered">
-                                        <div>
-                                        <p class="heading" id="load-voltage-label">Load Voltage</p>
-                                        <p class="title" id="load-voltage-value">3,456</p>
-                                        </div>
-                                    </div>
-                    
-                                    <div class="level-item-center has-text-centered">
-                                        <div>
-                                        <p class="heading" id="load-current-label">Load Current</p>
-                                        <p class="title" id="load-current-value">123</p>
-                                        </div>
-                                    </div>
-                    
-                                    <div class="level-item-right has-text-centered">
-                                        <div>
-                                        <p class="heading" id="power-absorbed-label">Power Absorbed</p>
-                                        <p class="title" id="power-absorbed-value">456K</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container is-flex" style="flex-flow: row wrap; margin-top: 25px;">
-                    
-                                    <div class="level-item-left has-text-centered">
-                                        <div>
-                                        <p class="heading" id="operating-temp-label">Operating Temperature</p>
-                                        <p class="title" id="operating-temp-value">3,456</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="level-item-center has-text-centered">
-                                        <div>
-                                        <p class="heading" id="surface-temp-label">Surface Temperature</p>
-                                        <p class="title" id="surface-temp-value">123</p>
-                                        </div>
-                                    </div>
-                    
-                                    <div class="level-item-right has-text-centered">
-                                        <div>
-                                        <p class="heading" id="water-breaker-label">Water Breaker</p>
-                                        <p class="title" id="water-breaker-value">456K</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </section>
-                    
-                        <section>
-                            <div class="tabs is-centered" style="margin-top: 50px;">
-                                <ul>
-                                    <li class="is-active"><a>Real-Time</a></li>
-                                    <li><a>History</a></li>
-                                    <li><a>Summary</a></li>
-                                    <li><a>Settings</a></li>
+    <!-- The whole thing -->
+    <section class="pane-group">
+        <!-- Sidebar -->
+        <section class="pane pane-sm sidebar" style="max-width: 160px; min-width: 160px; height: 100%;">
+            <nav class="nav-group">
+                <aside class="menu">
+                    <ul class="menu-list" id"user-menu"=>
+                        <li class="borderlist">
+                            <span class="icon" id="user-icon">
+                                <i class="fa fa-user"></i>                                      
+                            </span>
+                            <a id="user-list">Felipe Ballesteros</a>
+                        </li>
+                        <li>
+                            <a id="sensors-button">Sensors</a>
+                            <div class="menu-panel" id="sensorsDropdown">
+                                <ul style="width: 100%; padding: 0px">
+                                    <li><a>A1A</a></li>
+                                    <li><a>A2A</a></li>
+                                    <li><a>A1B</a></li>
                                 </ul>
                             </div>
-                        </section>
-                        <section style="height: 680px">
-                                        <div class="container has-text-centered" style="height: 365px;">
-                                                <div class="ct-chart" id="chart_1" style="height: 345px;"></div>
-                                        </div>
-                                            <div class="container has-text-centered" style="height: 365px;">
-                                                    <div class="ct-chart" id="chart_2" style="height: 345px;"></div>
-                                            </div>
-                                            <div class="container has-text-centered" style="height: 365px;">
-                                                    <div class="ct-chart" id="chart_3" style="height: 345px;"></div>
-                                            </div>
-                        </section>
+                        </li>
+                        <li><a>Customers</a></li>
+                    </ul>   
+                </aside>
+            </nav>
+        </section>
+        <!-- Top Right Block -->
+        <section class="pane">
+            <!-- Displayed Values -->
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container has-text-centered">
+                        <div class="container is-flex" style="flex-flow: row wrap; margin-top: 15px;">
+                            <div class="level-item-left has-text-centered">
+                                <div>
+                                    <p class="heading" id="load-voltage-label">Load Voltage</p>
+                                    <p class="title" id="load-voltage-value">3,456</p>
+                                </div>
+                            </div>
+                            <div class="level-item-center has-text-centered">
+                                <div>
+                                    <p class="heading" id="load-current-label">Load Current</p>
+                                    <p class="title" id="load-current-value">123</p>
+                                </div>    
+                            </div>
+                            <div class="level-item-right has-text-centered">
+                                <div>
+                                    <p class="heading" id="power-absorbed-label">Power Absorbed</p>
+                                    <p class="title" id="power-absorbed-value">456K</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container is-flex" style="flex-flow: row wrap; margin-top: 25px;">
+                            <div class="level-item-left has-text-centered">
+                                <div>
+                                <p class="heading" id="operating-temp-label">Operating Temperature</p>
+                                <p class="title" id="operating-temp-value">3,456</p>
+                                </div>
+                            </div>
+                            <div class="level-item-center has-text-centered">
+                                <div>
+                                <p class="heading" id="surface-temp-label">Surface Temperature</p>
+                                <p class="title" id="surface-temp-value">123</p>
+                                </div>
+                            </div>
+                
+                            <div class="level-item-right has-text-centered">
+                                <div>
+                                <p class="heading" id="water-breaker-label">Water Breaker</p>
+                                <p class="title" id="water-breaker-value">456K</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Right-Block Navbar -->
+            <div class="tabs is-boxed is-centered" style="margin-top: 50px; margin-bottom: 50px;">
+                <ul id="navBar">
+                    <li id="realTimeID" class="is-active"><a>Real-Time</a></li>
+                    <li id="historyID"><a>History</a></li>
+                    <li id="summaryID"><a>Summary</a></li>
+                    <li id="settingsID"><a>Settings</a></li>
+                </ul>
             </div>
-        </div>
-
-   
+            <!-- Graphs -->
+            <!-- Real-Time Graph -->
+            <section class="hero realTime">
+                <section class="hero">
+                    <div class="hero-body">
+                        <div class="container has-text-centered" style="height: 365px;">
+                            <div class="ct-chart" id="chart_1" style="height: 345px;"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="hero">
+                    <div class="hero-body">
+                        <div class="container has-text-centered" style="height: 365px;">
+                            <div class="ct-chart" id="chart_2" style="height: 345px;"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="hero">
+                    <div class="hero-body">
+                        <div class="container has-text-centered" style="height: 365px;">
+                            <div class="ct-chart" id="chart_3" style="height: 345px;"></div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <section class="hero history hidden">
+                    <p class="has-text-centered">History</p>
+                </section>
+                <section class="hero summary hidden">
+                    <p class="has-text-centered">Summary</p>
+                </section>
+                <section class="hero settings hidden">
+                    <p class="has-text-centered">Settings</p>
+            </section>
+        </section>
+    </section>
     <!-- Scripts -->
-    <script async type="text/javascript" src="../js/bulma.js"></script>
+    <script src="../bower_components/chartist/dist/chartist.js"></script>
     <script>
-
-            // jQuery
-            $ = require('jquery')
-        
-            // Main app script
-            require('./monitor')
-        
+        // jQuery
+        window.$ = window.jQuery = require("jquery");
+        // Main app script
+        require('./monitor.js');
     </script>
 </body>
 </html>

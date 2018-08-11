@@ -73,21 +73,68 @@ var data = {
     chart.update(data)
   })
 
-  fetchData()
+  fetchData();
 
-  var acc = document.getElementById("sensors-button");
+  // var acc = document.getElementById("sensors-button");
+  // acc.addEventListener("click", function() {
+  //     /* Toggle between adding and removing the "active" class,
+  //     to highlight the button that controls the panel */
+  //     this.classList.toggle("is-active");
 
-  
-    acc.addEventListener("click", function() {
-        /* Toggle between adding and removing the "active" class,
-        to highlight the button that controls the panel */
-        this.classList.toggle("is-active");
+  //     /* Toggle between hiding and showing the active panel */
+  //     var panel = this.nextElementSibling;
+  //     if (panel.style.display === "block") {
+  //         panel.style.display = "none";
+  //     } else {
+  //         panel.style.display = "block";
+  //     }
+  // });
 
-        /* Toggle between hiding and showing the active panel */
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
-    });
+// Top code to jQuery. Activates button + animates the sidebar
+var sensorButton = $("#sensors-button");
+var sensDropdown = $("#sensorsDropdown")
+sensorButton.on("click", function(event) {
+  $(this).toggleClass("is-active");
+  sensDropdown.toggle("slide");
+});
+
+//jQuery Addition
+var navBar = $('ul#navBar li');
+
+navBar.on("click", function() {
+  var target = $(this).text();
+
+  $(this).parent().find( 'li.is-active' ).removeClass( 'is-active' );
+  $(this).addClass("is-active");
+
+  if(target === ("Real-Time")) {
+    $(".history").hide();
+    $(".summary").hide();
+    $(".settings").hide();
+    $(".realTime").show("slow");
+  } 
+
+  if(target === ("History")) {
+    $(".realTime").hide("slow");
+    $(".summary").hide();
+    $(".settings").hide();
+    $(".history").show("slow");
+  } 
+
+  if(target === ("Summary")) {
+    $(".realTime").hide("slow");
+    $(".history").hide();
+    $(".settings").hide();
+    $(".summary").show("slow");
+  } 
+
+  if(target === ("Settings")) {
+    $(".realTime").hide('slow');
+    $(".history").hide();
+    $(".summary").hide();
+    $(".settings").show("slow");
+  } 
+});
+
+
+

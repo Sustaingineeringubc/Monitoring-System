@@ -71,3 +71,20 @@ body {
   margin-bottom: 5px;
   text-transform: uppercase;
 }
+
+/* .pane {
+  border: 2px solid black;
+}
+
+.hero {
+  border: 2px solid black;
+} */
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
