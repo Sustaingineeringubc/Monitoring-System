@@ -1801,7 +1801,7 @@ a.box:active {
 
 .checkbox:hover,
 .radio:hover {
-  color: #363636;
+  color: white;
 }
 
 .checkbox.is-disabled,
