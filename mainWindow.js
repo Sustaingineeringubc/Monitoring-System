@@ -59,9 +59,7 @@ ipcMain.on('is-new-user', async (e, msg) => {
       return
     }
     await datastore.newUser(msg.email, msg.password)
-    
-
-
+    loadPage('login.html')
   } catch(error) {
     e.sender.send('is-new-user', false)
   }

@@ -22,6 +22,9 @@ var data = {
   let chart_1 = new Chartist.Line('#chart_1', data);
   let chart_2 = new Chartist.Line('#chart_2', data);
   let chart_3 = new Chartist.Line('#chart_3', data);
+  let chart_4 = new Chartist.Line('#chart_4', data);
+  let chart_5 = new Chartist.Line('#chart_5', data);
+  let chart_6 = new Chartist.Line('#chart_6', data);
 
   
   let load_voltage_value = $('#load-voltage-value');
@@ -68,10 +71,21 @@ var data = {
     if (!msg.data) {
       return
     }
-    data.series = msg.data
-    chart_1.update(data)
-    chart_2.update(data)
+    data.series = [msg.data[0], msg.data[1]]
+    chart_1.update(data);
+    data.series = [msg.data[2], msg.data[3]]
+    chart_2.update(data);
+    data.series = [msg.data[4], msg.data[5]]
     chart_3.update(data)
+
+    let mostRecent = msg.data[5]
+    load_voltage_value.text(mostRecent[0])
+    load_current_value.text(mostRecent[1])
+    power_absorbed_value.text(mostRecent[2])
+    operating_temp_value.text(mostRecent[3])
+    surface_temp_value.text(mostRecent[4])
+    water_breaker_value.text(mostRecent[5])
+
 
   })
 
@@ -136,6 +150,11 @@ navBar.on("click", function() {
     $(".summary").hide();
     $(".settings").show("slow");
   } 
+
+
+  chart_4.update(data);
+  chart_5.update(data);
+  chart_6.update(data);
 });
 
 

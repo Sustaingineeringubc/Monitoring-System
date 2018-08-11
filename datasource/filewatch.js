@@ -83,7 +83,6 @@ ipcMain.on('is-data-updated', async (e, msg) => {
     if (!needsUpdate) {
       return
     }
-    console.log(msg)
     var data = {};
     switch(msg.dataType) {
       case DATA_TYPE_HISTORY:
