@@ -1,3 +1,46 @@
 .box {
     margin-top: 5rem;
-  }
+}
+
+.hidden {
+  display: none;
+}
+
+.background {
+  background: gray;
+}
+
+a {
+  color: white;
+}
+
+.button.is-primary {
+  background-color: rgb(75, 199, 186);
+}
+
+.box {
+  box-shadow: 0 2px 3px rgba(75, 199, 186, 0.3), 0 0 0 1px rgba(75, 199, 186, 0.4);
+  background-color:gray;
+  color: white;
+}
+
+.input.is-primary, .textarea.is-primary {
+  border-color: rgb(75, 199, 186);;
+}
+
+.input.is-active, .input.is-focused, .input:active, .input:focus, .textarea.is-active, .textarea.is-focused, .textarea:active, .textarea:focus {
+  border-color: rgb(75, 199, 186);
+  box-shadow: 0 0 0 0.125em rgba(50,115,220,.25);
+}
+
+.avatar img {
+  background: rgba(75, 199, 186,0.4);
+}
+
+a:hover {
+  color: rgb(75, 199, 186);
+}
+
+.checkbox:hover, .radio:hover {
+  color: rgb(75, 199, 186);
+}
