@@ -75,23 +75,30 @@ var data = {
 
   fetchData();
 
-  var acc = document.getElementById("sensors-button");
-  acc.addEventListener("click", function() {
-      /* Toggle between adding and removing the "active" class,
-      to highlight the button that controls the panel */
-      this.classList.toggle("is-active");
+  // var acc = document.getElementById("sensors-button");
+  // acc.addEventListener("click", function() {
+  //     /* Toggle between adding and removing the "active" class,
+  //     to highlight the button that controls the panel */
+  //     this.classList.toggle("is-active");
 
-      /* Toggle between hiding and showing the active panel */
-      var panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-          panel.style.display = "none";
-      } else {
-          panel.style.display = "block";
-      }
-  });
+  //     /* Toggle between hiding and showing the active panel */
+  //     var panel = this.nextElementSibling;
+  //     if (panel.style.display === "block") {
+  //         panel.style.display = "none";
+  //     } else {
+  //         panel.style.display = "block";
+  //     }
+  // });
+
+// Top code to jQuery. Activates button + animates the sidebar
+var sensorButton = $("#sensors-button");
+var sensDropdown = $("#sensorsDropdown")
+sensorButton.on("click", function(event) {
+  $(this).toggleClass("is-active");
+  sensDropdown.toggle("slide");
+});
 
 //jQuery Addition
-
 var navBar = $('ul#navBar li');
 
 navBar.on("click", function() {
@@ -127,10 +134,7 @@ navBar.on("click", function() {
     $(".summary").hide();
     $(".settings").show("slow");
   } 
-
 });
-
-var realTime = $(".realTime");
 
 
 
