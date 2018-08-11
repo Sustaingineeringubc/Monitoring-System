@@ -1,7 +1,8 @@
 
 // Modules
-const {app, ipcMain} = require('electron')
-const mainWindow = require('./mainWindow')
+const {app, ipcMain} = require('electron');
+const mainWindow = require('./mainWindow');
+const monitorWindow = require('./monitorWindows.js');
 
 ipcMain.on('app-loaded', (e, itemURL) => {
   mainWindow.loadPage('login.html')
@@ -43,6 +44,14 @@ var createWindow = (window) => {
       mainWindow.createWindow(mainWindow);
       break;
     case 'monitor':
+    let monitorWindow = new BrowserWindows({
+      width: 1000, 
+      height: 800, 
+      minWidth: 920, 
+      minHeight: 730
+    })
+    windows.monitorWindow = monitorWindow;
+    monitorWindow.createWindow(mainWindow);
       break;
     case 'user_menu':
       break;

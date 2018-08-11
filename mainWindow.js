@@ -19,6 +19,7 @@ ipcMain.on('is-new-user', async (e, msg) => {
       return
     }
     await datastore.newUser(msg.email, msg.password)
+    //TODO: 
     let win = new BrowserWindow({width: 800, height: 600})
     win.loadURL(`file://${__dirname}/renderer/monitor.html`)
     this.win.close()
@@ -37,6 +38,7 @@ ipcMain.on('log-in', async (e, msg) => {
       e.sender.send('log-in', {error:"User already exists"})
       return
     }
+    //TODO:
     let win = new BrowserWindow({width: 1000, height: 800, minWidth: 920, minHeight: 730})
     win.loadURL(`file://${__dirname}/renderer/monitor.html`)
     win.webContents.openDevTools()
@@ -73,7 +75,6 @@ exports.createWindow = (mainWindow) => {
   // Devtools
   //this.win.webContents.openDevTools()
 
-  // Load main window content
   this.win.loadURL(`file://${__dirname}/renderer/main.html`)
 
   this.win.once('ready-to-show', async () => {
