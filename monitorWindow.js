@@ -11,7 +11,7 @@ exports.createWindow = (monitorWindow) => {
 
     this.win = monitorWindow;
 
-    this.win.loadURL(`file://${__dirname}/renderer/main.html`);
+    this.win.loadURL(`file://${__dirname}/renderer/monitor.html`);
 
 
     // Create full size app
@@ -22,7 +22,6 @@ exports.createWindow = (monitorWindow) => {
 
     this.win.once('ready-to-show', async () => {
         this.win.show()
-       // updateLoadingState('Initializing datastore')
       })  
       // Handle window closed
       this.win.on('closed', () => {
