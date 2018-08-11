@@ -8,10 +8,8 @@ exports.readCSVFile = function(file) {
 		const readStream = fs.createReadStream('test-csv.csv')
 			.pipe(csv({headers : true}))
 			.on('data', data => {
-				console.log(data)
 			})		
 			.on('end', data => {
-				console.log('End of file')
 				return resolve(users)
 		})
 	})

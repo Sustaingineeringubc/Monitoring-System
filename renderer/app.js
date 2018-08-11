@@ -7,19 +7,6 @@ $ = require('jquery');
 
 const {ipcRenderer} = require('electron')
 
-
-
-
-function loadApp() {
-  setTimeout(() => {
-    fecthState(5)
-  }, 2000)
-  setTimeout(function(){ 
-    ipcRenderer.send('app-loaded', 'true') 
-    $('#loading-label').text('text changed')
-    }, 5000);
-}
-
 ipcRenderer.on('loading-state', (e, state) => {
   $('#loading-label').text(state);
 })

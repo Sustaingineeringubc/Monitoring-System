@@ -60,14 +60,28 @@ exports.expireSessions = function() {
         try {
             let currentTime = Math.round((new Date()).getTime() / 1000);
             let activeSession = await update({ session: true, session_expire: { $lte: currentTime}}, { $set: { session: false } }, { multi: true }, 'userSettings')
-            if (activeSession.length === 0 ) {
-                return resolve();
-            }
             return resolve();
         } catch(error) {
             return reject(error)
         }
     })
+}
+
+exports.logOut = function() {
+    return new Promise( async (resolve, reject) => {
+        try {
+            let loggedOutSession = await update( {session: true, userId: user_id}, { $set: { session: false, session_expire: undefined } }, { multi: true }, 'userSettings')
+            clearUserData();
+            return resolve();
+        } catch (error) {
+            return reject(error);
+        }
+    })
+}
+
+var clearUserData = function() {
+    user_id = exports.user_id = null
+    user_sensors = {};
 }
 
 exports.restoreSession = function(userId) {

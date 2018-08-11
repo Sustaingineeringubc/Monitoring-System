@@ -1,19 +1,34 @@
 
 // Modules
-const {app, ipcMain} = require('electron')
-const mainWindow = require('./mainWindow')
+const {app, BrowserWindow, ipcMain} = require('electron');
+const mainWindow = require('./mainWindow');
+const monitorWindow = require('./monitorWindow.js');
+const datastore = require('./datastore');
 
 ipcMain.on('app-loaded', (e, itemURL) => {
-  mainWindow.loadPage('login.html')
+  createWindow('monitor');
 })
+
+
+var checkActiveSession = async function(currentWin) {
+  await datastore.expireSessions();
+  let activeSession = await datastore.restoreSession();
+  if (!activeSession) {
+    return
+  }
+  createWindow('monitor');
+}
+
+
+let windows = {};
 
 // Enable Electron-Reload
 //require('electron-reload')(__dirname)
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', mainWindow.createWindow)
+app.on('ready', () => {
+    createWindow('main')
+    checkActiveSession(windows.mainWindow)
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -25,5 +40,34 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) mainWindow.createWindow()
+  if (mainWindow !== null) { return }
 })
+
+function createWindow(window) {
+  switch(window) {
+    case 'main':
+      let mainBrowserWindow = new BrowserWindow({
+        width: 1000, 
+        height: 800, 
+        minWidth: 920, 
+        minHeight: 730
+      })
+      windows.mainWindow = mainBrowserWindow;
+      mainWindow.createWindow(mainBrowserWindow)
+      break;
+    case 'monitor':
+    let monitorBrowserWindow = new BrowserWindow({
+      width: 1000, 
+      height: 800, 
+      minWidth: 920, 
+      minHeight: 730
+    })
+    windows.monitorWindow = monitorBrowserWindow;
+    monitorWindow.createWindow(monitorBrowserWindow);
+    windows.mainWindow.close()
+      break;
+    case 'user_menu':
+      break;
+  }
+}
+
