@@ -105,7 +105,7 @@ var data = {
         setting.dataType = dataType
         ipcRenderer.send('is-data-updated', setting)
         fetchData()
-    }, 2000);
+    }, 500);
   }
 
   ipcRenderer.on('is-data-updated', (e, msg) => {

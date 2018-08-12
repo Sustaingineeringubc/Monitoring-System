@@ -8,7 +8,6 @@ const datastore = require('./datastore');
 var checkActiveSession = async function(currentWin) {
   await datastore.expireSessions();
   let activeSession = await datastore.restoreSession();
-  console.log(activeSession)
   if (!activeSession) {
     return false
   }
@@ -26,7 +25,6 @@ app.on('ready', async () => {
     createWindow('main')
     let activeSession = await checkActiveSession(windows.mainWindow)
     if (!activeSession) {
-      console.log('settign timeout')
       setTimeout(() => {
       mainWindow.loadPage('login.html')
       }, 3000)

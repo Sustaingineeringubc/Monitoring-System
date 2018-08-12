@@ -18,9 +18,11 @@ const DATA_TYPE_STATS = 'DATA_TYPE_STATS';
 
 
 try {
-  fs.watchFile('test-csv.csv', (curr, prev) => {
+  fs.watch('test-csv.csv', () => {
     fs.stat('test-csv.csv', (err, stats) => {
+      if (stats.size === 0) { return }
       if (err) throw err;
+      console.log('StartByte', startByte, stats.size)
       fs.createReadStream('test-csv.csv', {
         start: startByte,
         end: stats.size

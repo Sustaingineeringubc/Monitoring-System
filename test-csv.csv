@@ -71,5 +71,3 @@ voltage, current, power, op-temp, surface-temperature, water_breaker, pump_id
 1.0,3.4,74.0,33,23.0,4,"A2A"
 4.0,3.4,75.0,34,20.0,5,"A2A"
 5.0,3.4,535.45,34,20.0,1,"A2A"
-4.0,3.4,75.0,34,20.0,5,"A2A"
-1.0,3.4,74.0,33,23.0,4,"A2A"

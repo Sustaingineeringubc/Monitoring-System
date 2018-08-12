@@ -18,7 +18,7 @@ exports.createWindow = (monitorWindow) => {
     this.win.maximize();
 
     // Devtools
-    this.win.webContents.openDevTools()
+    //this.win.webContents.openDevTools()
 
     this.win.once('ready-to-show', async () => {
         this.win.show()
