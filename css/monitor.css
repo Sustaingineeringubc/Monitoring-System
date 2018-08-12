@@ -1,90 +1,90 @@
 .hero.is-success {
-    background: #F2F6FA;
+  background: #F2F6FA;
 }
 
 .borderlist {
-  list-style-position:inside;
-  border-bottom: 1px;
-  border-bottom-color: black;
+list-style-position:inside;
+border-bottom: 1px;
+border-bottom-color: black;
 }
 
 .borderlist a {
-  padding-top: 25px;
-  background-color: rgb(212,210,212);
+padding-top: 25px;
+background-color: rgb(212,210,212);
 }
 
 .menu-panel {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
+padding: 0 18px;
+display: none;
+overflow: hidden;
 }
 
 #user-icon {
-  position: fixed;
-  font-size: 18px;
-  margin-top: 2px;
-  margin-left: 6px;
+position: fixed;
+font-size: 18px;
+margin-top: 2px;
+margin-left: 6px;
 }
 
 .border-test {
-    border-style: solid;
-    border-color: blue;
+  border-style: solid;
+  border-color: blue;
 }
 
 body {
-  padding-top: 1%;
-  padding-left: 1%;
-  padding-right: 1%;
-  padding-bottom: 1%;
+padding-top: 1%;
+padding-left: 1%;
+padding-right: 1%;
+padding-bottom: 1%;
 }
 
 
 .box {
-	width: 40%;
-	float: right;
-	margin: 4%;
+width: 40%;
+float: right;
+margin: 4%;
 }
 
 .level-item-left {
-  width: 32%;
+width: 32%;
 }
 
 .level-item-center {
-  width: 32%;
+width: 32%;
 }
 
 .level-item-right {
-  width: 32%;
+width: 32%;
 }
 
 .title {
-  color: #363636;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.125;
+color: #363636;
+font-size: 24px;
+font-weight: 500;
+line-height: 1.125;
 }
 
 .heading {
-  display: block;
-  font-size: 11px;
-  letter-spacing: 1px;
-  margin-bottom: 5px;
-  text-transform: uppercase;
+display: block;
+font-size: 11px;
+letter-spacing: 1px;
+margin-bottom: 5px;
+text-transform: uppercase;
 }
 
-/* .pane {
-  border: 2px solid black;
+.border {
+border: 2px solid black;
 }
 
-.hero {
-  border: 2px solid black;
-} */
+/* .hero {
+border: 2px solid black;
+}  */
 
 .visible {
-  display: block;
+display: block;
 }
 
 .hidden {
-  display: none;
+display: none;
 }
 
