@@ -1,8 +1,8 @@
 
 // Modules
 
-const {BrowserWindow, ipcMain} = require('electron')
-const datastore = require('./datastore.js')
+const {BrowserWindow, ipcMain} = require('electron');
+const datastore = require('./datastore.js');
 const filewatch = require('./datasource/filewatch');
 var loadingState = "Kicking off engines."
 
@@ -14,15 +14,13 @@ ipcMain.on('loading-state', (e, msg) => {
 
 // mainWindow createWindow fn
 exports.createWindow = (mainWindow) => {
-
   this.win = mainWindow
-
   // Create full size app
   //this.win.maximize();
 
   // Devtools
   //this.win.webContents.openDevTools()
-
+  console.log('window created_1')
   this.win.loadURL(`file://${__dirname}/renderer/main.html`)
 
   this.win.once('ready-to-show', async () => {
