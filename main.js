@@ -64,7 +64,6 @@ function createWindow(window) {
         minHeight: 730
       })
       windows.monitorWindow = monitorBrowserWindow;
-      console.log('creting monitor')
       monitorWindow.createWindow(monitorBrowserWindow);
       windows.mainWindow.close()
       break;

@@ -20,7 +20,6 @@ exports.createWindow = (mainWindow) => {
 
   // Devtools
   //this.win.webContents.openDevTools()
-  console.log('window created_1')
   this.win.loadURL(`file://${__dirname}/renderer/main.html`)
 
   this.win.once('ready-to-show', async () => {
