@@ -220,7 +220,8 @@ navBar.on("click", function() {
 });
 
 
-var userMenu = $("#user-menu");
-userMenu.on('click', (event) => {
-  //User menu pressed
+var userMenu = $("#userMenu");
+var userMenuButton = $("#userMenuButton");
+userMenuButton.on('click', (event) => {
+  userMenu.fadeToggle(100);
 })

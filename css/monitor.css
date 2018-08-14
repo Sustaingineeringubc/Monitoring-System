@@ -88,10 +88,10 @@ display: block;
 display: none;
 }
 
-.littleMenu {
+.userMenu {
   width: 200px; 
   height: 350px; 
-  background: rgb(180,180,180);
+  background: rgb(212,210,212);
   position: absolute;
   top: 11%;
   bottom: 0;
@@ -100,5 +100,5 @@ display: none;
   z-index: 1;
   border-radius: 5%;
   text-align: center;
-  box-shadow: 0px 0px 10px black;
+  box-shadow: 0px 0px 8px black;
 }
