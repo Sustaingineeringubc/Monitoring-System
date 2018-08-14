@@ -57,16 +57,16 @@ function createWindow(window) {
       mainWindow.createWindow(mainBrowserWindow)
       break;
     case 'monitor':
-    let monitorBrowserWindow = new BrowserWindow({
-      width: 1000, 
-      height: 800, 
-      minWidth: 920, 
-      minHeight: 730
-    })
-    windows.monitorWindow = monitorBrowserWindow;
-    console.log('creting monitor')
-    monitorWindow.createWindow(monitorBrowserWindow);
-    windows.mainWindow.close()
+      let monitorBrowserWindow = new BrowserWindow({
+        width: 1000, 
+        height: 800, 
+        minWidth: 920, 
+        minHeight: 730
+      })
+      windows.monitorWindow = monitorBrowserWindow;
+      console.log('creting monitor')
+      monitorWindow.createWindow(monitorBrowserWindow);
+      windows.mainWindow.close()
       break;
   }
 }

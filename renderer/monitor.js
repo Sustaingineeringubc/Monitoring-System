@@ -222,4 +222,7 @@ navBar.on("click", function() {
 });
 
 
-
+var userMenu = $("#user-menu");
+userMenu.on('click', (event) => {
+  //User menu pressed
+})
