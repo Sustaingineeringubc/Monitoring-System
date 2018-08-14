@@ -57,17 +57,15 @@ function createWindow(window) {
       mainWindow.createWindow(mainBrowserWindow)
       break;
     case 'monitor':
-    let monitorBrowserWindow = new BrowserWindow({
-      width: 1000, 
-      height: 800, 
-      minWidth: 920, 
-      minHeight: 730
-    })
-    windows.monitorWindow = monitorBrowserWindow;
-    monitorWindow.createWindow(monitorBrowserWindow);
-    windows.mainWindow.close()
-      break;
-    case 'user_menu':
+      let monitorBrowserWindow = new BrowserWindow({
+        width: 1000, 
+        height: 800, 
+        minWidth: 920, 
+        minHeight: 730
+      })
+      windows.monitorWindow = monitorBrowserWindow;
+      monitorWindow.createWindow(monitorBrowserWindow);
+      windows.mainWindow.close()
       break;
   }
 }

@@ -22,7 +22,6 @@ try {
     fs.stat('test-csv.csv', (err, stats) => {
       if (stats.size === 0) { return }
       if (err) throw err;
-      console.log('StartByte', startByte, stats.size)
       fs.createReadStream('test-csv.csv', {
         start: startByte,
         end: stats.size

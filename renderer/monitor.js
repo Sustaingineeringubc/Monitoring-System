@@ -124,8 +124,6 @@ var data = {
     let powerTemp = msg.data[4];
     let waterTemp = msg.data[5];
     
-    console.log(voltageData)
-
     data.realtimeData.graph_1.series = [voltageData, currentData]
     data.realtimeData.graph_2.series = [oTempData, sTempData]
     data.realtimeData.graph_3.series = [powerTemp, waterTemp]
@@ -222,4 +220,7 @@ navBar.on("click", function() {
 });
 
 
-
+var userMenu = $("#user-menu");
+userMenu.on('click', (event) => {
+  //User menu pressed
+})
