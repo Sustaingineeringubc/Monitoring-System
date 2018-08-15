@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" />
     <link rel="stylesheet" href="../css/photon.css">
     <link rel="stylesheet" href="../css/monitor2.css">
+    <link rel="stylesheet" href="../bower_components/chartist/dist/chartist.css">
     <link rel="stylesheet" type="text/css" href="../css/monitor.css">
 
-    <link rel="stylesheet" href="../bower_components/chartist/dist/chartist.css">
 </head>
 
 <body>
@@ -23,8 +23,35 @@
     <section class="pane-group">
         <div class="userMenu hidden" id="userMenu">
             <ul style="color: white">
-                <li
-                id="logout">Logout</li>
+                <li class="user-menu" id="user-menu-info">
+                    <div class="columns">
+                            <div class="column" id="user-menu-column-one">
+                                    <figure class="image is-48x48">
+                                            <img src="https://bulma.io/images/placeholders/48x48.png">
+                                        </figure>
+                            </div>
+                            <div class="column" id="user-menu-column-two">
+                                <p id="user-menu-user-name">Felipe Ballesteros</p>
+                                <p id="user-menu-user-org">Sustaingineering</p>
+                            </div>
+                          </div>
+                    
+                </li>
+                <li class="user-menu">
+                    <a id="logout">Logout</a>
+                </li>
+                <li class="user-menu">
+                    <a id="logout">Something else</a>
+                </li>
+                <li class="user-menu">
+                    <a id="logout">Else</a>
+                </li>
+                <li class="user-menu">
+                    <a id="logout">Something useful</a>
+                </li>
+                <li class="user-menu">
+                    <a id="logout">I am so stoned!</a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

@@ -11,55 +11,55 @@ const DATA_TYPE_SETTINGS = 'DATA_TYPE_SETTINGS';
 
 
 var data = {
-    realtimeData: {
-      graph_1:{
-        // A labels array that can contain any sort of values
-        labels: ['5', '4', '3', '2', '1'],
-        // Our series array that contains series objects or in this case series data arrays
-        series: []
-      },
-      graph_2:{
-        // A labels array that can contain any sort of values
-        labels: ['5', '4', '3', '2', '1'],
-        // Our series array that contains series objects or in this case series data arrays
-        series: []
-      },
-      graph_3:{
-        // A labels array that can contain any sort of values
-        labels: ['5', '4', '3', '2', '1'],
-        // Our series array that contains series objects or in this case series data arrays
-        series: []
-      }
+  realtimeData: {
+    graph_1:{
+      // A labels array that can contain any sort of values
+      labels: ['5', '4', '3', '2', '1'],
+      // Our series array that contains series objects or in this case series data arrays
+      series: []
     },
-    historyData: {
-      graph_1:{
-        // A labels array that can contain any sort of values
-        labels: ['5', '4', '3', '2', '1'],
-        // Our series array that contains series objects or in this case series data arrays
-        series: []
-      },
-      graph_2:{
-        // A labels array that can contain any sort of values
-        labels: ['5', '4', '3', '2', '1'],
-        // Our series array that contains series objects or in this case series data arrays
-        series: []
-      },
-      graph_3:{
-        // A labels array that can contain any sort of values
-        labels: ['5', '4', '3', '2', '1'],
-        // Our series array that contains series objects or in this case series data arrays
-        series: []
-      }
+    graph_2:{
+      // A labels array that can contain any sort of values
+      labels: ['5', '4', '3', '2', '1'],
+      // Our series array that contains series objects or in this case series data arrays
+      series: []
     },
-    labelData: {
-      voltage: "",
-      current: "",
-      oTemp: "",
-      sTemp: "",
-      power: "",
-      water:""
+    graph_3:{
+      // A labels array that can contain any sort of values
+      labels: ['5', '4', '3', '2', '1'],
+      // Our series array that contains series objects or in this case series data arrays
+      series: []
     }
-  };
+  },
+  historyData: {
+    graph_1:{
+      // A labels array that can contain any sort of values
+      labels: ['5', '4', '3', '2', '1'],
+      // Our series array that contains series objects or in this case series data arrays
+      series: []
+    },
+    graph_2:{
+      // A labels array that can contain any sort of values
+      labels: ['5', '4', '3', '2', '1'],
+      // Our series array that contains series objects or in this case series data arrays
+      series: []
+    },
+    graph_3:{
+      // A labels array that can contain any sort of values
+      labels: ['5', '4', '3', '2', '1'],
+      // Our series array that contains series objects or in this case series data arrays
+      series: []
+    }
+  },
+  labelData: {
+    voltage: "",
+    current: "",
+    oTemp: "",
+    sTemp: "",
+    power: "",
+    water:""
+  }
+};
   
   // Create a new line chart object where as first parameter we pass in a selector
   // that is resolving to our chart container element. The Second parameter
@@ -204,3 +204,8 @@ var userMenuButton = $("#userMenuButton");
 userMenuButton.on('click', (event) => {
   userMenu.fadeToggle(100);
 })
+
+var logOutButton = $('#logout');
+logOutButton.on('click', (event) => [
+  console.log('logout pressed')
+])
