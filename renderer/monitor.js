@@ -6,7 +6,8 @@ const DATA_TYPE_SUMARY = 'DATA_TYPE_SUMARY';
 
 //TODO
 const DATA_TYPE_REAL_TIME = 'DATA_TYPE_REAL_TIME';
-const DATA_TYPE_STATS = 'DATA_TYPE_STATS';
+const DATA_TYPE_SETTINGS = 'DATA_TYPE_SETTINGS';
+
 
 
 var data = {
@@ -86,25 +87,18 @@ var data = {
   let from = 0000001
   let to =   0000001
   
-  function fetchData() {
+  function fetchRealTimeData() {
     setTimeout( () => {
+      if (dataType !== DATA_TYPE_REAL_TIME) {
+        return
+      }
       let setting = {
         user_id: user_id,
         pump_id: pump_id,
+        dataType: dataType
       } 
-      switch(dataType) {
-        case DATA_TYPE_HISTORY:
-          setting.to = to;
-          setting.from = from;
-          break
-        case DATA_TYPE_SUMARY:
-          break
-        default:
-          break;
-      }
-        setting.dataType = dataType
-        ipcRenderer.send('is-data-updated', setting)
-        fetchData()
+      ipcRenderer.send('is-data-updated', setting)
+      fetchRealTimeData()
     }, 500);
   }
 
@@ -115,7 +109,6 @@ var data = {
     if (!msg.data) {
       return
     }
-
   
     let voltageData = msg.data[0];
     let currentData = msg.data[1];
@@ -148,24 +141,8 @@ var data = {
 
   })
 
-  fetchData();
+//jQuery Addition
 
-  // var acc = document.getElementById("sensors-button");
-  // acc.addEventListener("click", function() {
-  //     /* Toggle between adding and removing the "active" class,
-  //     to highlight the button that controls the panel */
-  //     this.classList.toggle("is-active");
-
-  //     /* Toggle between hiding and showing the active panel */
-  //     var panel = this.nextElementSibling;
-  //     if (panel.style.display === "block") {
-  //         panel.style.display = "none";
-  //     } else {
-  //         panel.style.display = "block";
-  //     }
-  // });
-
-// Top code to jQuery. Activates button + animates the sidebar
 var sensorButton = $("#sensors-button");
 var sensDropdown = $("#sensorsDropdown")
 sensorButton.on("click", function(event) {
@@ -173,7 +150,6 @@ sensorButton.on("click", function(event) {
   sensDropdown.toggle("slide");
 });
 
-//jQuery Addition
 var navBar = $('ul#navBar li');
 
 navBar.on("click", function() {
@@ -187,6 +163,8 @@ navBar.on("click", function() {
     $(".summary").hide();
     $(".settings").hide();
     $(".realTime").show("slow");
+    dataType = DATA_TYPE_REAL_TIME
+    fetchRealTimeData();
     setTimeout(() => {
       realtimeChart1.update(data.realtimeData.graph_1);
       realtimeChart2.update(data.realtimeData.graph_2);
@@ -199,6 +177,7 @@ navBar.on("click", function() {
     $(".summary").hide();
     $(".settings").hide();
     $(".history").show("slow");
+    dataType = DATA_TYPE_HISTORY;
     historyChart4.update(data.historyData.graph_1)
     historyChart5.update(data.historyData.graph_2)
     historyChart6.update(data.historyData.graph_3)
