@@ -209,3 +209,16 @@ var logOutButton = $('#logout');
 logOutButton.on('click', (event) => [
   console.log('logout pressed')
 ])
+
+let historyForm = $('#history-form');
+let historySearchButton = $('#history-search-button');
+
+historySearchButton.on('click', event => {
+  historyForm.submit();
+})
+
+historyForm.submit((event) =>{
+  console.log(event)
+  console.log(historyForm.serialize())
+  event.preventDefault();
+})
