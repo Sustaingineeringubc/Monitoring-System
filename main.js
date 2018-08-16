@@ -18,6 +18,31 @@ var checkActiveSession = async function(currentWin) {
 
 let windows = {};
 
+ipcMain.on('log-in', async (e, msg) => {
+  try {
+    let isLoggedIn = await datastore.loginUser(msg.email, msg.password, msg.isRemembered)
+    if (!isLoggedIn) {
+      e.sender.send('log-in', {error:"User already exists"})
+      return
+    }
+    createWindow('monitor');
+  } catch(error) {
+    console.log('error', error)
+    e.sender.send('is-new-user', false)
+  } 
+})
+
+ipcMain.on('log-out', async (e, msg) => {
+  try{
+    await datastore.logOut()
+    windows.monitorWindow.close();
+    windows.monitorWindow = null;
+    createWindow('main', 'login.html')
+  } catch(error) {
+    console.log(error);
+  }
+})
+
 // Enable Electron-Reload
 //require('electron-reload')(__dirname)
 
@@ -44,7 +69,7 @@ app.on('activate', () => {
   if (mainWindow !== null) { return }
 })
 
-function createWindow(window) {
+function createWindow(window, filename) {
   switch(window) {
     case 'main':
       let mainBrowserWindow = new BrowserWindow({
@@ -54,7 +79,7 @@ function createWindow(window) {
         minHeight: 730
       })
       windows.mainWindow = mainBrowserWindow;
-      mainWindow.createWindow(mainBrowserWindow)
+      mainWindow.createWindow(mainBrowserWindow, filename)
       break;
     case 'monitor':
       let monitorBrowserWindow = new BrowserWindow({
@@ -65,7 +90,8 @@ function createWindow(window) {
       })
       windows.monitorWindow = monitorBrowserWindow;
       monitorWindow.createWindow(monitorBrowserWindow);
-      windows.mainWindow.close()
+      windows.mainWindow.close();
+      windows.mainWindow = null;
       break;
   }
 }

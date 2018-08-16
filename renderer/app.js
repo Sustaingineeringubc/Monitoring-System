@@ -11,6 +11,7 @@ ipcRenderer.on('loading-state', (e, state) => {
   $('#loading-label').text(state);
 })
 
+fecthState(1)
 function fecthState(count) {
   if (count === 1) {
     return
@@ -20,5 +21,3 @@ function fecthState(count) {
     fecthState(count - 1)
   }, 1000)
 }
-
-loadApp()

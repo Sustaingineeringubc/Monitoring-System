@@ -206,9 +206,9 @@ userMenuButton.on('click', (event) => {
 })
 
 var logOutButton = $('#logout');
-logOutButton.on('click', (event) => [
-  console.log('logout pressed')
-])
+  logOutButton.on('click', (event) => {
+  ipcRenderer.send('log-out', true)
+})
 
 let historyForm = $('#history-form');
 let historySearchButton = $('#history-search-button');
