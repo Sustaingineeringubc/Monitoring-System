@@ -19,7 +19,7 @@ display: none;
 overflow: hidden;
 }
 
-#user-icon {
+#user-menu-icon {
 position: fixed;
 font-size: 18px;
 margin-top: 2px;
@@ -89,16 +89,64 @@ display: none;
 }
 
 .userMenu {
-  width: 200px; 
-  height: 350px; 
-  background: rgb(212,210,212);
+  width: 250px;
+  height: 350px;
+  background: white;
   position: absolute;
-  top: 11%;
+  top: 47px;
   bottom: 0;
+  border-color: rgb(220,220,220);
+  border-style: solid;
   right: 0;
-  left: 1%;
+  left: 14px;
   z-index: 1;
-  border-radius: 5%;
+  border-width: 1px;
+  border-radius: 5px;
   text-align: center;
-  box-shadow: 0px 0px 6px black;
+  box-shadow: 0px 0px 6px rgb(230,230,230);
+}
+
+.user-menu a {
+  font-size: 14px;
+  color: black;
+  padding-left: 19px!important;
+  border-radius: 2px;
+  color: #4a4a4a;
+  display: block;
+  padding: 0.5em 0.75em;
+  text-align: left;
+  line-height: 12px;
+  max-height: 25px;}
+  .user-menu a:hover {
+    background-color: rgb(190,190,190);;
+    color: #363636;}
+
+#user-menu-column-one {
+  margin-left: 17px;
+  padding-right: 1px;
+}
+
+#user-menu-column-two {
+  min-width: 167px;
+  text-align: left;
+}
+
+#user-menu-user-org {
+  color: gray;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+#user-menu-user-name{
+  font-size: 14px;
+  color: black;
+  margin-top: 3px;
+}
+
+.columns {
+  margin-top: 7px;
+}
+
+#user-menu-info {
+  margin-bottom: 18px;
 }
