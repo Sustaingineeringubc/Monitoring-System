@@ -218,7 +218,7 @@ historySearchButton.on('click', event => {
 })
 
 historyForm.submit((event) =>{
-  console.log(event)
-  console.log(historyForm.serialize())
+  let data = historyForm.serializeArray()
   event.preventDefault();
+  ipcRenderer.send('get-history', data)
 })

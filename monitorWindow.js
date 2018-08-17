@@ -51,3 +51,11 @@ ipcMain.on('is-new-user', async (e, msg) => {
     e.sender.send('is-new-user', false)
   }
 })
+
+ipcMain.on('get-history', async (e, msg) => {
+  try {
+    console.log('data', msg)  
+  } catch(error) {
+    e.sender.send('is-new-user', false)
+  }
+})
