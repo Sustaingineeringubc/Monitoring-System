@@ -216,8 +216,7 @@ exports.getRealTime = function(data)  {
             .find({ userId: userId, pumpId: pumpId })
             .sort({ createdAt: -1 })      // OR `.sort({ updatedAt: -1 })` to sort by last modification time
             .limit(count)
-            .exec(function(error, data) {
-
+            .exec((error, data) => {
                 if (error) {
                     return reject(error)
                 }
@@ -253,6 +252,57 @@ exports.getRealTime = function(data)  {
     })
 }
 
+exports.getHistoryData = function(data) {
+    return new Promise((resolve, reject) => {
+        try {
+            let userId = user_id;
+            let {pumpId, from, to} = data
+            let db = new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true  })
+            db.find({
+                userId: userId, 
+                pumpId: pumpId, 
+                createdAt: { 
+                    $lte: to,
+                    $gte: from
+                }
+            })
+            .sort({ createdAt: -1 })
+            .exec((error, data) => {
+                if (error) { return reject(error) }
+                if (data.length <= 0) { return resolve() }
+                let voltageList = new Array();
+                let currentList = new Array();
+                let powerList = new Array();
+                let opTempList = new Array();
+                let suTempList = new Array();
+                let waterBreakerList = new Array();
+                let labels = new Array();
+                for (i = data.length - 1; i >= 0; i--) {
+                    labels.push(i.toString())
+                    voltageList.push(data[i].voltage)
+                    currentList.push(data[i].current)
+                    powerList.push(data[i].power)
+                    opTempList.push(data[i].opTemp)
+                    suTempList.push(data[i].suTemp)
+                    waterBreakerList.push(data[i].waterBreaker)
+                }
+                let response =  [
+                    voltageList,
+                    currentList,
+                    powerList,
+                    opTempList,
+                    suTempList,
+                    waterBreakerList,
+                    labels
+                ]
+                return resolve(response)
+            })
+        } catch(error) {
+            console.log(error)
+            return reject(error)
+        }
+    })
+}
 //wrappers
 
 var find = exports.find = function(object, tableName) {

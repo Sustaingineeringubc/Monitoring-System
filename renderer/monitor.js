@@ -114,19 +114,19 @@ var data = {
     let currentData = msg.data[1];
     let oTempData = msg.data[2];
     let sTempData = msg.data[3];
-    let powerTemp = msg.data[4];
-    let waterTemp = msg.data[5];
+    let power = msg.data[4];
+    let water = msg.data[5];
     
     data.realtimeData.graph_1.series = [voltageData, currentData]
     data.realtimeData.graph_2.series = [oTempData, sTempData]
-    data.realtimeData.graph_3.series = [powerTemp, waterTemp]
+    data.realtimeData.graph_3.series = [power, water]
 
     data.labelData.voltage = voltageData[4]
     data.labelData.current = currentData[4]
     data.labelData.oTemp = oTempData[4]
     data.labelData.sTemp = sTempData[4]
-    data.labelData.power = powerTemp[4]
-    data.labelData.water = waterTemp[4]
+    data.labelData.power = power[4]
+    data.labelData.water = water[4]
     realtimeChart1.update(data.realtimeData.graph_1);
     realtimeChart2.update(data.realtimeData.graph_2);
     realtimeChart3.update(data.realtimeData.graph_3);
@@ -220,5 +220,33 @@ historySearchButton.on('click', event => {
 historyForm.submit((event) =>{
   let data = historyForm.serializeArray()
   event.preventDefault();
-  ipcRenderer.send('get-history', data)
+  ipcRenderer.send('get-history', {
+    data: {
+      from: data[0].name === 'from' ? data[0].value : data[1].value,
+      to: data[0].name === 'to' ? data[0].value : data[1].value,
+      pumpId: pump_id
+    }
+  })
+})
+
+ipcRenderer.on('get-history', (e, msg) => {
+  if (msg.error) {
+    return  alert( msg.error)
+  }
+  let voltageData = msg.data[0];
+  let currentData = msg.data[1];
+  let oTempData = msg.data[2];
+  let sTempData = msg.data[3];
+  let power = msg.data[4];
+  let water = msg.data[5];
+  let labels = msg.data[6];
+  data.historyData.graph_1.series = [voltageData, currentData];
+  data.historyData.graph_1.labels = labels
+  data.historyData.graph_2.series = [oTempData, sTempData];
+  data.historyData.graph_2.labels = labels
+  data.historyData.graph_3.series = [power, water];
+  data.historyData.graph_3.labels = labels
+  historyChart4.update(data.historyData.graph_1)
+  historyChart5.update(data.historyData.graph_2)
+  historyChart6.update(data.historyData.graph_3)
 })

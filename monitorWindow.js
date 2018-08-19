@@ -54,8 +54,13 @@ ipcMain.on('is-new-user', async (e, msg) => {
 
 ipcMain.on('get-history', async (e, msg) => {
   try {
-    console.log('data', msg)  
+    let from  = msg.data.from
+    let to = msg.data.to
+    let unixFrom = parseInt((new Date(from).getTime() / 1000).toFixed())
+    let unixTo = parseInt((new Date(to).getTime() / 1000).toFixed())
+    let data = await datastore.getHistoryData({from: unixFrom, to: unixTo, pumpId: msg.data.pumpId})
+    e.sender.send('get-history', {data: data})
   } catch(error) {
-    e.sender.send('is-new-user', false)
+    e.sender.send('get-history', false)
   }
 })
