@@ -22,13 +22,13 @@ ipcMain.on('log-in', async (e, msg) => {
   try {
     let isLoggedIn = await datastore.loginUser(msg.email, msg.password, msg.isRemembered)
     if (!isLoggedIn) {
-      e.sender.send('log-in', {error:"User already exists"})
+      e.sender.send('log-in', {error: "Incorrect username or password"})
       return
     }
     createWindow('monitor');
   } catch(error) {
     console.log('error', error)
-    e.sender.send('is-new-user', false)
+    e.sender.send('log-in', {error: error})
   } 
 })
 

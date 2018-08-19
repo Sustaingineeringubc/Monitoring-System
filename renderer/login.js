@@ -14,6 +14,10 @@ loginButton.click(() => {
 
 });
 
+ipcRenderer.on('log-in', (e, msg) => {
+    if (msg.error) { return alert(msg.error)}
+})
+
 var emailCheckEmpty = function (email) {
     if(!email) {
         $('#email').addClass("is-danger");

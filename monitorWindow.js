@@ -38,20 +38,6 @@ exports.createWindow = (monitorWindow) => {
   return this.win;
 }
 
-ipcMain.on('is-new-user', async (e, msg) => {
-  try {
-    let isOldUser = await datastore.findUser(msg.email)
-    if (isOldUser) {
-      e.sender.send('is-new-user', { error:"User already exists" })
-      return
-    }
-    await datastore.newUser(msg.email, msg.password)
-    loadPage('login.html')
-  } catch(error) {
-    e.sender.send('is-new-user', false)
-  }
-})
-
 ipcMain.on('get-history', async (e, msg) => {
   try {
     let from  = msg.data.from
