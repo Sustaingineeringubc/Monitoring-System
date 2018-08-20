@@ -178,9 +178,11 @@ navBar.on("click", function() {
     $(".settings").hide();
     $(".history").show("slow");
     dataType = DATA_TYPE_HISTORY;
-    historyChart4.update(data.historyData.graph_1)
-    historyChart5.update(data.historyData.graph_2)
-    historyChart6.update(data.historyData.graph_3)
+    setTimeout(() => {
+      historyChart4.update(data.historyData.graph_1)
+      historyChart5.update(data.historyData.graph_2)
+      historyChart6.update(data.historyData.graph_3)
+    }, 500)
   } 
 
   if(target === ("Summary")) {

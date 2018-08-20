@@ -132,7 +132,7 @@
                 </div>
             </section>
             <!-- Right-Block Navbar -->
-            <div class="tabs is-boxed is-centered" style="margin-top: 50px; margin-bottom: 50px;">
+            <div class="tabs is-boxed is-centered" style="margin-top: 50px; margin-bottom: 15px;">
                 <ul id="navBar">
                     <li id="realTimeID" class="is-active"><a>Real-Time</a></li>
                     <li id="historyID"><a>History</a></li>
@@ -145,21 +145,21 @@
             <section class="hero realTime">
                 <section class="hero">
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px;">
+                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
                             <div class="ct-chart" id="chart_1" style="height: 345px;"></div>
                         </div>
                     </div>
                 </section>
                 <section class="hero">
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px;">
+                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
                             <div class="ct-chart" id="chart_2" style="height: 345px;"></div>
                         </div>
                     </div>
                 </section>
                 <section class="hero">
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px;">
+                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
                             <div class="ct-chart" id="chart_3" style="height: 345px;"></div>
                         </div>
                     </div>
@@ -168,43 +168,55 @@
             <!-- History -->
             <section class="hero history hidden">
                 <!-- Datepicker -->
-                <section class="hero">
-                    <!-- <div class="hero-body border"> -->
+                <section class="hero" style="margin-bottom: 32px">
                     <form id="history-form">
-                        <div class="columns">
-                            <div class="column" id="column-one">
-                                from:
-                                <input type="datetime-local" name="from">
+                        <div class="columns" style="max-width: 750px; margin: auto">
+                            <div class="column" id="column-one" style="">
+                                <div class="columns">
+                                    <div class="column">
+                                        <input type="datetime-local" name="from" style="max-width: 245px;">
+                                    </div>
+                                    <div class="column">
+                                        <input type="datetime-local" name="to" style="max-width: 245px">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="column" id="column-two">
-                                to:
-                                <input type="datetime-local" name="to">
-                            </div>
-                            <div class="column" id="column-two">
+                            <div class="column" id="column-three" style="text-align: center; margin-top: 16px">
                                 <a id="history-search-button" class="button">Search</a>
                             </div>
                             </div>
                         </form>
-                    <!-- </div> -->
                 </section>
+                <section class="separator"></section>
                 <!-- History Graphs -->
                 <section class="hero">
+                    <div class="hero-title" style="text-align: center">
+                        <p>Current & Voltage</p>
+                    </div>
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px;">
+                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
                             <div class="ct-chart" id="chart_4" style="height: 345px;"></div>
                         </div>
                     </div>
                 </section>
+                <section class="separator"></section>
                 <section class="hero">
+                    <div class="hero-title" style="text-align: center">
+                        <p>Operating & Surface Temperature</p>
+                    </div>
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px;">
+                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
                             <div class="ct-chart" id="chart_5" style="height: 345px;"></div>
                         </div>
                     </div>
                 </section>
+                <section class="separator"></section>
                 <section class="hero">
+                    <div class="hero-title" style="text-align: center">
+                        <p>Power & Water Breaker</p>
+                    </div>
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px;">
+                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
                             <div class="ct-chart" id="chart_6" style="height: 345px;"></div>
                         </div>
                     </div>
