@@ -162,3 +162,29 @@ display: none;
 .hero-title {
   margin-top: 45px;
 }
+
+.customSidebar {
+  max-width: 160px; 
+  min-width: 160px; 
+  height: 100%;
+}
+
+.customUl {
+  width: 100%; 
+  padding: 0px;
+}
+
+.customContainer {
+  flex-flow: row wrap; 
+  margin-top: 15px;
+}
+
+.customNavbar {
+  margin-top: 50px; 
+  margin-bottom: 15px;
+}
+
+.customChartSpace {
+  height: 365px; 
+  max-width: 100%;
+}
