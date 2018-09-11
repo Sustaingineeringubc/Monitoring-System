@@ -54,7 +54,7 @@
             </ul>
         </div>
         <!-- Sidebar -->
-        <section class="pane pane-sm sidebar" style="max-width: 160px; min-width: 160px; height: 100%;">
+        <section class="pane pane-sm sidebar customSidebar">
             <nav class="nav-group">
                 <aside class="menu">
                     <ul class="menu-list">
@@ -67,7 +67,7 @@
                         <li>
                             <a id="sensors-button">Sensors</a>
                             <div class="menu-panel" id="sensorsDropdown">
-                                <ul style="width: 100%; padding: 0px">
+                                <ul class="customUl">
                                     <li><a>A1A</a></li>
                                     <li><a>A2A</a></li>
                                     <li><a>A1B</a></li>
@@ -87,7 +87,7 @@
             <section class="hero">
                 <div class="hero-body">
                     <div class="container has-text-centered">
-                        <div class="container is-flex" style="flex-flow: row wrap; margin-top: 15px;">
+                        <div class="container is-flex customContainer">
                             <div class="level-item-left has-text-centered">
                                 <div>
                                     <p class="heading" id="load-voltage-label">Load Voltage</p>
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="container is-flex" style="flex-flow: row wrap; margin-top: 25px;">
+                        <div class="container is-flex customContainer">
                             <div class="level-item-left has-text-centered">
                                 <div>
                                 <p class="heading" id="operating-temp-label">Operating Temperature</p>
@@ -132,7 +132,7 @@
                 </div>
             </section>
             <!-- Right-Block Navbar -->
-            <div class="tabs is-boxed is-centered" style="margin-top: 50px; margin-bottom: 15px;">
+            <div class="tabs is-boxed is-centered customNavbar">
                 <ul id="navBar">
                     <li id="realTimeID" class="is-active"><a>Real-Time</a></li>
                     <li id="historyID"><a>History</a></li>
@@ -145,21 +145,21 @@
             <section class="hero realTime">
                 <section class="hero">
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
+                        <div class="container has-text-centered customChartSpace">
                             <div class="ct-chart" id="chart_1" style="height: 345px;"></div>
                         </div>
                     </div>
                 </section>
                 <section class="hero">
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
+                        <div class="container has-text-centered customChartSpace">
                             <div class="ct-chart" id="chart_2" style="height: 345px;"></div>
                         </div>
                     </div>
                 </section>
                 <section class="hero">
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
+                        <div class="container has-text-centered customChartSpace">
                             <div class="ct-chart" id="chart_3" style="height: 345px;"></div>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
                         <p>Current & Voltage</p>
                     </div>
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
+                        <div class="container has-text-centered customChartSpace">
                             <div class="ct-chart" id="chart_4" style="height: 345px;"></div>
                         </div>
                     </div>
@@ -205,7 +205,7 @@
                         <p>Operating & Surface Temperature</p>
                     </div>
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
+                        <div class="container has-text-centered customChartSpace">
                             <div class="ct-chart" id="chart_5" style="height: 345px;"></div>
                         </div>
                     </div>
@@ -216,7 +216,7 @@
                         <p>Power & Water Breaker</p>
                     </div>
                     <div class="hero-body">
-                        <div class="container has-text-centered" style="height: 365px; max-width: 100%;">
+                        <div class="container has-text-centered customChartSpace">
                             <div class="ct-chart" id="chart_6" style="height: 345px;"></div>
                         </div>
                     </div>
