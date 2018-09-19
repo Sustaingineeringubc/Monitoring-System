@@ -1,4 +1,4 @@
-datastore/
+datastore/local/*
 package-lock.json
 test-csv.csv
 node_modules/
