@@ -3,15 +3,38 @@ const {ipcRenderer} = require('electron')
 $('#signup-button').click(() => {
     let password = $('#password').val();
     let email = $('#email').val();
-    
-    if (!email || !password) {
+    let username = $('#username').val();
+    let organization = $('#organization').val();
+
+    if (!email || !password || !username || !organization) {
         emailCheckEmpty(email);
         passwordCheckEmpty(password);
+        usernameCheckEmpty(username);
+        organizationCheckEmpty(organization);
         return
     }
-
-ipcRenderer.send('is-new-user', {password, email})   
+    ipcRenderer.send('is-new-user', {password, email, username, organization})   
 })
+
+var organizationCheckEmpty =  function(username)  {
+    if(!organization) {
+        $('#organization').addClass("is-danger");
+        $('#organization').removeClass("is-primary");
+    } else {
+        $('#organization').addClass("is-primary");
+        $('#organization').removeClass("is-danger");
+    }
+}
+
+var usernameCheckEmpty =  function(username)  {
+    if(!username) {
+        $('#username').addClass("is-danger");
+        $('#username').removeClass("is-primary");
+    } else {
+        $('#username').addClass("is-primary");
+        $('#username').removeClass("is-danger");
+    }
+}
 
 var emailCheckEmpty = function (email) {
     if(!email) {
