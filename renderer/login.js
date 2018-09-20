@@ -5,6 +5,11 @@ loginButton.click(() => {
     let password = $('#password').val();
     let email = $('#email').val();
     let isRemembered = $('#remember').prop('checked');
+
+    // Looses focus effect when login button is pressed
+    $('#email').blur();
+    $('#password').blur();
+
     if (!email || !password) {
         emailCheckEmpty(email);
         passwordCheckEmpty(password);
@@ -49,3 +54,25 @@ var box = $("#box");
 loginTitle.slideToggle("slow");
 loginSubtitle.slideToggle("slow");
 box.slideToggle("slow");
+
+// Enter-Key Functionality
+$("#email, #password").keypress(function(event) {
+    let password = $('#password').val();
+    let email = $('#email').val();
+    let isRemembered = $('#remember').prop('checked');
+
+    var key = event.which;
+    if (key == 13){
+        // Looses focus effect when enter key is pressed
+        $('#email').blur();
+        $('#password').blur();
+        if (!email || !password) {
+            emailCheckEmpty(email);
+            passwordCheckEmpty(password);
+            return
+        }
+        else {
+            ipcRenderer.send('log-in', {password, email, isRemembered}) 
+        }
+    }
+})

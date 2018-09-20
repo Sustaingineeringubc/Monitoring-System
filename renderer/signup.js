@@ -6,6 +6,12 @@ $('#signup-button').click(() => {
     let username = $('#username').val();
     let organization = $('#organization').val();
 
+    // Looses focus effect when signup button is pressed
+    $('#email').blur();
+    $('#password').blur();
+    $('#username').blur();
+    $('#organization').blur();
+
     if (!email || !password || !username || !organization) {
         emailCheckEmpty(email);
         passwordCheckEmpty(password);
@@ -16,7 +22,7 @@ $('#signup-button').click(() => {
     ipcRenderer.send('is-new-user', {password, email, username, organization})   
 })
 
-var organizationCheckEmpty =  function(username)  {
+var organizationCheckEmpty =  function(organization)  {
     if(!organization) {
         $('#organization').addClass("is-danger");
         $('#organization').removeClass("is-primary");
@@ -70,3 +76,30 @@ var box = $("#box");
 signupTitle.slideToggle("slow");
 signupSubtitle.slideToggle("slow");
 box.slideToggle("slow");
+
+// Enter-Key Functionality
+$("#email, #password, #username, #organization").keypress(function(event) {
+    let password = $('#password').val();
+    let email = $('#email').val();
+    let username = $('#username').val();
+    let organization = $('#organization').val();
+
+    var key = event.which;
+    if (key == 13){
+        // Looses focus effect when enter key is pressed
+        $('#email').blur();
+        $('#password').blur();
+        $('#username').blur();
+        $('#organization').blur();
+        if (!email || !password || !username || !organization) {
+            emailCheckEmpty(email);
+            passwordCheckEmpty(password);
+            usernameCheckEmpty(username);
+            organizationCheckEmpty(organization);
+            return
+        }
+        else {
+            ipcRenderer.send('log-in', {password, email, username, organization}) 
+        }
+    }
+})
