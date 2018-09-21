@@ -19,6 +19,17 @@ $('#signup-button').click(() => {
         organizationCheckEmpty(organization);
         return
     }
+    //Email validation
+    if(email) {
+        var validator = require("email-validator");
+        if(!validator.validate(email)) {
+            //error
+            $('#email').addClass("is-danger");
+            $('#email').removeClass("is-primary");
+            $('#emailCheckbox').addClass("hidden");
+            return
+        } 
+    }
     ipcRenderer.send('is-new-user', {password, email, username, organization})   
 })
 
