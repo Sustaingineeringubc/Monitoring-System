@@ -1,23 +1,14 @@
 const {ipcRenderer} = require('electron')
 
-var loginButton = $('#login-button');
-loginButton.click(() => {
-    let password = $('#password').val();
-    let email = $('#email').val();
-    let isRemembered = $('#remember').prop('checked');
-
-    // Looses focus effect when login button is pressed
-    $('#email').blur();
-    $('#password').blur();
-
-    if (!email || !password) {
-        emailCheckEmpty(email);
-        passwordCheckEmpty(password);
-        return
-    }
-    ipcRenderer.send('log-in', {password, email, isRemembered}) 
-
+// Login Validation
+$('#login-button').click(() => {
+    SendForm()
 });
+
+// Enter-Key Functionality
+$("#email, #password").keypress(function(event) {
+    SendForm(event) 
+})
 
 ipcRenderer.on('log-in', (e, msg) => {
     if (msg.error) { return alert(msg.error)}
@@ -55,24 +46,37 @@ loginTitle.slideToggle("slow");
 loginSubtitle.slideToggle("slow");
 box.slideToggle("slow");
 
-// Enter-Key Functionality
-$("#email, #password").keypress(function(event) {
-    let password = $('#password').val();
-    let email = $('#email').val();
-    let isRemembered = $('#remember').prop('checked');
-
-    var key = event.which;
-    if (key == 13){
-        // Looses focus effect when enter key is pressed
-        $('#email').blur();
-        $('#password').blur();
-        if (!email || !password) {
-            emailCheckEmpty(email);
-            passwordCheckEmpty(password);
+function SendForm(event) {
+    if(event){
+        var key = event.which;
+        if (key !== 13){
             return
         }
-        else {
-            ipcRenderer.send('log-in', {password, email, isRemembered}) 
-        }
     }
-})
+
+    let password = $('#password').val();
+    let email = $('#email').val();
+
+    // Looses focus effect when signup button is pressed
+    $('#email').blur();
+    $('#password').blur();
+
+    if (!email || !password || !username || !organization) {
+        emailCheckEmpty(email);
+        passwordCheckEmpty(password);
+        return
+    }
+    //Email validation
+    if(email) {
+        var validator = require("email-validator");
+        if(!validator.validate(email)) {
+            //error
+            $('#email').addClass("is-danger");
+            $('#email').removeClass("is-primary");
+            $('#emailCheckbox').addClass("hidden");
+            alert('Enter valid email address')
+            return
+        } 
+    }
+    ipcRenderer.send('is-new-user', {password, email, username, organization}) 
+}

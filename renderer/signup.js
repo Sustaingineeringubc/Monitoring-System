@@ -1,48 +1,13 @@
 const {ipcRenderer} = require('electron')
 
-function AfterClick(event) {
-    if(event){
-        var key = event.which;
-        if (key !== 13){
-            return
-        }
-    }
-
-    let password = $('#password').val();
-    let email = $('#email').val();
-    let username = $('#username').val();
-    let organization = $('#organization').val();
-
-    // Looses focus effect when signup button is pressed
-    $('#email').blur();
-    $('#password').blur();
-    $('#username').blur();
-    $('#organization').blur();
-
-    if (!email || !password || !username || !organization) {
-        emailCheckEmpty(email);
-        passwordCheckEmpty(password);
-        usernameCheckEmpty(username);
-        organizationCheckEmpty(organization);
-        return
-    }
-    //Email validation
-    if(email) {
-        var validator = require("email-validator");
-        if(!validator.validate(email)) {
-            //error
-            $('#email').addClass("is-danger");
-            $('#email').removeClass("is-primary");
-            $('#emailCheckbox').addClass("hidden");
-            alert('Enter valid email address')
-            return
-        } 
-    }
-    ipcRenderer.send('is-new-user', {password, email, username, organization}) 
-}
-
+// Signup Validation
 $('#signup-button').click(() => {
-    AfterClick() 
+    SendForm() 
+})
+
+// Enter-Key Functionality
+$("#email, #password, #username, #organization").keypress(function(event) {
+    SendForm(event) 
 })
 
 var organizationCheckEmpty =  function(organization)  {
@@ -100,7 +65,43 @@ signupTitle.slideToggle("slow");
 signupSubtitle.slideToggle("slow");
 box.slideToggle("slow");
 
-// Enter-Key Functionality
-$("#email, #password, #username, #organization").keypress(function(event) {
-    AfterClick(event) 
-})
+function SendForm(event) {
+    if(event){
+        var key = event.which;
+        if (key !== 13){
+            return
+        }
+    }
+
+    let password = $('#password').val();
+    let email = $('#email').val();
+    let username = $('#username').val();
+    let organization = $('#organization').val();
+
+    // Looses focus effect when signup button is pressed
+    $('#email').blur();
+    $('#password').blur();
+    $('#username').blur();
+    $('#organization').blur();
+
+    if (!email || !password || !username || !organization) {
+        emailCheckEmpty(email);
+        passwordCheckEmpty(password);
+        usernameCheckEmpty(username);
+        organizationCheckEmpty(organization);
+        return
+    }
+    //Email validation
+    if(email) {
+        var validator = require("email-validator");
+        if(!validator.validate(email)) {
+            //error
+            $('#email').addClass("is-danger");
+            $('#email').removeClass("is-primary");
+            $('#emailCheckbox').addClass("hidden");
+            alert('Enter valid email address')
+            return
+        } 
+    }
+    ipcRenderer.send('is-new-user', {password, email, username, organization}) 
+}
