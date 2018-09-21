@@ -5,49 +5,16 @@ const mainWindow = require('./mainWindow');
 const monitorWindow = require('./monitorWindow.js');
 const datastore = require('./datastore');
 
-var checkActiveSession = async function(currentWin) {
-  await datastore.expireSessions();
-  let activeSession = await datastore.restoreSession();
-  if (!activeSession) {
-    return false
-  }
-  createWindow('monitor');
-  return true
-}
-
-
 let windows = {};
-
-ipcMain.on('log-in', async (e, msg) => {
-  try {
-    let isLoggedIn = await datastore.loginUser(msg.email, msg.password, msg.isRemembered)
-    if (!isLoggedIn) {
-      e.sender.send('log-in', {error: "Incorrect username or password"})
-      return
-    }
-    createWindow('monitor');
-  } catch(error) {
-    console.log('error', error)
-    e.sender.send('log-in', {error: error})
-  } 
-})
-
-ipcMain.on('log-out', async (e, msg) => {
-  try{
-    await datastore.logOut()
-    windows.monitorWindow.close();
-    windows.monitorWindow = null;
-    createWindow('main', 'login.html')
-  } catch(error) {
-    console.log(error);
-  }
-})
 
 // Enable Electron-Reload
 //require('electron-reload')(__dirname)
 
+// [ Triggers ]
+
 app.on('ready', async () => {
     createWindow('main')
+    await datastore.initializeDataStore()
     let activeSession = await checkActiveSession(windows.mainWindow)
     if (!activeSession) {
       setTimeout(() => {
@@ -68,6 +35,35 @@ app.on('activate', () => {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow !== null) { return }
 })
+
+// [ IPC Commiunication ]
+
+ipcMain.on('log-out', async (e, msg) => {
+  try{
+    await datastore.logOut()
+    windows.monitorWindow.close();
+    windows.monitorWindow = null;
+    createWindow('main', 'login.html')
+  } catch(error) {
+    console.log(error);
+  }
+})
+
+ipcMain.on('log-in', async (e, msg) => {
+  try {
+    let isLoggedIn = await datastore.loginUser(msg.email, msg.password, msg.isRemembered)
+    if (!isLoggedIn) {
+      e.sender.send('log-in', {error: "Incorrect username or password"})
+      return
+    }
+    createWindow('monitor');
+  } catch(error) {
+    console.log('error', error)
+    e.sender.send('log-in', {error: error})
+  } 
+})
+
+// [ Methods ]
 
 function createWindow(window, filename) {
   switch(window) {
@@ -94,5 +90,15 @@ function createWindow(window, filename) {
       windows.mainWindow = null;
       break;
   }
+}
+
+var checkActiveSession = async function(currentWin) {
+  await datastore.expireSessions();
+  let activeSession = await datastore.restoreSession();
+  if (!activeSession) {
+    return false
+  }
+  createWindow('monitor');
+  return true
 }
 

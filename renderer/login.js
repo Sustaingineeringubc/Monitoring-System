@@ -56,27 +56,16 @@ function SendForm(event) {
 
     let password = $('#password').val();
     let email = $('#email').val();
+    let isRemembered = $('#remember').prop('checked');
 
     // Looses focus effect when signup button is pressed
     $('#email').blur();
     $('#password').blur();
 
-    if (!email || !password || !username || !organization) {
+    if (!email || !password) {
         emailCheckEmpty(email);
         passwordCheckEmpty(password);
         return
     }
-    //Email validation
-    if(email) {
-        var validator = require("email-validator");
-        if(!validator.validate(email)) {
-            //error
-            $('#email').addClass("is-danger");
-            $('#email').removeClass("is-primary");
-            $('#emailCheckbox').addClass("hidden");
-            alert('Enter valid email address')
-            return
-        } 
-    }
-    ipcRenderer.send('is-new-user', {password, email, username, organization}) 
+    ipcRenderer.send('log-in', {password, email, isRemembered}) 
 }
