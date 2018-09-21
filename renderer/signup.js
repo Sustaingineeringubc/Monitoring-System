@@ -27,6 +27,7 @@ $('#signup-button').click(() => {
             $('#email').addClass("is-danger");
             $('#email').removeClass("is-primary");
             $('#emailCheckbox').addClass("hidden");
+            alert('Enter valid email address')
             return
         } 
     }
