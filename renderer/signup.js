@@ -3,15 +3,44 @@ const {ipcRenderer} = require('electron')
 $('#signup-button').click(() => {
     let password = $('#password').val();
     let email = $('#email').val();
-    
-    if (!email || !password) {
+    let username = $('#username').val();
+    let organization = $('#organization').val();
+
+    // Looses focus effect when signup button is pressed
+    $('#email').blur();
+    $('#password').blur();
+    $('#username').blur();
+    $('#organization').blur();
+
+    if (!email || !password || !username || !organization) {
         emailCheckEmpty(email);
         passwordCheckEmpty(password);
+        usernameCheckEmpty(username);
+        organizationCheckEmpty(organization);
         return
     }
-
-ipcRenderer.send('is-new-user', {password, email})   
+    ipcRenderer.send('is-new-user', {password, email, username, organization})   
 })
+
+var organizationCheckEmpty =  function(organization)  {
+    if(!organization) {
+        $('#organization').addClass("is-danger");
+        $('#organization').removeClass("is-primary");
+    } else {
+        $('#organization').addClass("is-primary");
+        $('#organization').removeClass("is-danger");
+    }
+}
+
+var usernameCheckEmpty =  function(username)  {
+    if(!username) {
+        $('#username').addClass("is-danger");
+        $('#username').removeClass("is-primary");
+    } else {
+        $('#username').addClass("is-primary");
+        $('#username').removeClass("is-danger");
+    }
+}
 
 var emailCheckEmpty = function (email) {
     if(!email) {
@@ -47,3 +76,30 @@ var box = $("#box");
 signupTitle.slideToggle("slow");
 signupSubtitle.slideToggle("slow");
 box.slideToggle("slow");
+
+// Enter-Key Functionality
+$("#email, #password, #username, #organization").keypress(function(event) {
+    let password = $('#password').val();
+    let email = $('#email').val();
+    let username = $('#username').val();
+    let organization = $('#organization').val();
+
+    var key = event.which;
+    if (key == 13){
+        // Looses focus effect when enter key is pressed
+        $('#email').blur();
+        $('#password').blur();
+        $('#username').blur();
+        $('#organization').blur();
+        if (!email || !password || !username || !organization) {
+            emailCheckEmpty(email);
+            passwordCheckEmpty(password);
+            usernameCheckEmpty(username);
+            organizationCheckEmpty(organization);
+            return
+        }
+        else {
+            ipcRenderer.send('log-in', {password, email, username, organization}) 
+        }
+    }
+})
