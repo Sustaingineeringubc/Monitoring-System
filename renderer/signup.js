@@ -1,6 +1,13 @@
 const {ipcRenderer} = require('electron')
 
-$('#signup-button').click(() => {
+function AfterClick(event) {
+    if(event){
+        var key = event.which;
+        if (key !== 13){
+            return
+        }
+    }
+
     let password = $('#password').val();
     let email = $('#email').val();
     let username = $('#username').val();
@@ -31,7 +38,11 @@ $('#signup-button').click(() => {
             return
         } 
     }
-    ipcRenderer.send('is-new-user', {password, email, username, organization})   
+    ipcRenderer.send('is-new-user', {password, email, username, organization}) 
+}
+
+$('#signup-button').click(() => {
+    AfterClick() 
 })
 
 var organizationCheckEmpty =  function(organization)  {
@@ -91,27 +102,5 @@ box.slideToggle("slow");
 
 // Enter-Key Functionality
 $("#email, #password, #username, #organization").keypress(function(event) {
-    let password = $('#password').val();
-    let email = $('#email').val();
-    let username = $('#username').val();
-    let organization = $('#organization').val();
-
-    var key = event.which;
-    if (key == 13){
-        // Looses focus effect when enter key is pressed
-        $('#email').blur();
-        $('#password').blur();
-        $('#username').blur();
-        $('#organization').blur();
-        if (!email || !password || !username || !organization) {
-            emailCheckEmpty(email);
-            passwordCheckEmpty(password);
-            usernameCheckEmpty(username);
-            organizationCheckEmpty(organization);
-            return
-        }
-        else {
-            ipcRenderer.send('log-in', {password, email, username, organization}) 
-        }
-    }
+    AfterClick(event) 
 })
