@@ -34,6 +34,7 @@
     "async": "^2.6.1",
     "chartist": "^0.11.0",
     "electron-rebuild": "^1.8.1",
+    "email-validator": "^2.0.4",
     "fast-csv": "^2.4.1",
     "jquery": "^3.3.1",
     "jquery-lazy": "^1.7.9",
