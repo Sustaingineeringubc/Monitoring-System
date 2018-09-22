@@ -7,6 +7,7 @@ const filewatch = require('./datasource/filewatch');
 var loadingState = "Kicking off engines."
 
 exports.win
+
 ipcMain.on('loading-state', (e, msg) => {
   e.sender.send('loading-state', loadingState)
 })
@@ -22,11 +23,9 @@ exports.createWindow = (mainWindow, fileName) => {
   // Devtools
   //this.win.webContents.openDevTools()
 
-
   this.win.once('ready-to-show', async () => {
     this.win.show()
     loadingState = "Initializing Local Datastore.."
-    await datastore.initializeDataStore()
     loadingState = "Local Datastore initialized.."
     return true;
    // updateLoadingState('Initializing datastore')
@@ -42,11 +41,9 @@ exports.createWindow = (mainWindow, fileName) => {
 var loadPage = exports.loadPage = (name) => {
   if (name === 'monitor.html') {
     this.win.loadURL('file://' + __dirname + '/renderer/monitor.html')
-
   }  else{
     this.win.loadURL(`file://${__dirname}/renderer/${name}`)
   }
-
 }
 
 

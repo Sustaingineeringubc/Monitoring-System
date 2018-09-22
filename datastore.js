@@ -1,25 +1,28 @@
-var Datastore = require('nedb')
-var _ = require('lodash');
+const Datastore = require('nedb');
+const _ = require('lodash');
 
-var user_id = exports.user_id = null
-var user_sensors = {};
+var user_id = exports.user_id = null;
+let user_sensors = {};
+
+let udb = {
+    userInfo: new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true }),
+    dataCollection: new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true }),
+    userSettings: new Datastore({ filename: `${__dirname}/datastore/local/userSettings`, autoload: true })
+};
 
 var initializeDataStore = exports.initializeDataStore = () => {
     return new Promise((resolve, reject) => {
-        var db = {};
-        db.userInfo = new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true });
-        db.userInfo.find({ _id: '0000000000000001' }, (error, docs) => {
+        udb.userInfo.find({ _id: '0000000000000001' }, (error, docs) => {
             if (error) {
                 return reject(error)
             }
             if (docs.length !== 0) {
                 return resolve();
             }
-            db.dataCollection = new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true });
             var doc = { 
                         _id: '0000000000000001'
                     };
-            db.userInfo.insert(doc, error => {   // Callback is optional
+            udb.userInfo.insert(doc, error => {   // Callback is optional
                 if (error) {
                     return reject(error)
                 }
@@ -31,9 +34,7 @@ var initializeDataStore = exports.initializeDataStore = () => {
 
 exports.findUser = function(email) {
     return new Promise((resolve, reject) => {
-        var db = {};
-        db.userInfo = new Datastore({ filename: `${__dirname}/datastore/local/userInfo`, autoload: true });
-        db.userInfo.find({ email: email }, (error, docs) => {
+        udb.userInfo.find({ email: email }, (error, docs) => {
             if (error) {
                 return reject(error)
             }
@@ -103,8 +104,6 @@ exports.restoreSession = function(userId) {
 exports.loginUser = function(email, password, isRemember) {
     return new Promise(async (resolve, reject) => {
         try {
-            var db = {};
-            db.userSettings =  new Datastore({ filename: `${__dirname}/datastore/local/userSettings`, autoload: true })
             const user = await find({ email: email, password: password }, 'userInfo')
             if (user.length === 0) {
                 return reject('Incorrect email or password')
@@ -121,7 +120,7 @@ exports.loginUser = function(email, password, isRemember) {
             if (setting.length === 0) {
                 uSettDoc.created_at = Math.round((new Date()).getTime() / 1000);
 
-                db.userSettings.insert(uSettDoc, (error, newDoc)=> {
+                udb.userSettings.insert(uSettDoc, (error, newDoc)=> {
                     if (error) {
                         return reject(error)
                     }
@@ -130,7 +129,7 @@ exports.loginUser = function(email, password, isRemember) {
             } else {
                 uSettDoc.updated_at = Math.round((new Date()).getTime() / 1000);
 
-                db.userSettings.update(setting[0], uSettDoc, {}, (error, settingReplaced) => {
+                udb.userSettings.update(setting[0], uSettDoc, {}, (error, settingReplaced) => {
                     if (error) {
                         return reject(error)
                     }
@@ -188,8 +187,7 @@ exports.getSummaryData = function(pumpId) {
     return new Promise((resolve, reject) => {
         try {
             let userId = user_id;
-            var db = new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true  });
-            db
+            udb['dataCollection']
             .findOne({ userId: userId, pumpId: pumpId })
             .sort({ createdAt: -1 })      // OR `.sort({ updatedAt: -1 })` to sort by last modification time
             .limit(1)
@@ -211,8 +209,7 @@ exports.getRealTime = function(data)  {
             let userId = user_id;
             let pumpId = data.pumpId;
             let count = 5
-            var db = new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true  });
-            db
+            udb['dataCollection']
             .find({ userId: userId, pumpId: pumpId })
             .sort({ createdAt: -1 })      // OR `.sort({ updatedAt: -1 })` to sort by last modification time
             .limit(count)
@@ -257,8 +254,7 @@ exports.getHistoryData = function(data) {
         try {
             let userId = user_id;
             let {pumpId, from, to} = data
-            let db = new Datastore({ filename: `${__dirname}/datastore/local/dataCollection`, autoload: true  })
-            db.find({
+            udb['dataCollection'].find({
                 userId: userId, 
                 pumpId: pumpId, 
                 createdAt: { 
@@ -307,9 +303,7 @@ exports.getHistoryData = function(data) {
 
 var find = exports.find = function(object, tableName) {
     return new Promise((resolve, reject) => {
-        var db = {};
-        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-        db.schema.find(object, (error, docs) => {
+        udb[tableName].find(object, (error, docs) => {
             if (error) {
                 return reject(error)
             }
@@ -320,9 +314,7 @@ var find = exports.find = function(object, tableName) {
 
 var insert = exports.insert = function(object, tableName) {
     return new Promise ((resolve, reject) => {
-        var db = {};
-        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-        db.schema.insert(object, (error, newDoc) => {
+        udb[tableName].insert(object, (error, newDoc) => {
             if (error) {
                 return reject(error)
             }
@@ -333,9 +325,7 @@ var insert = exports.insert = function(object, tableName) {
 
 var update = exports.update = function(query, updateModifier, options, tableName) {
     return new Promise ((resolve,reject) => {
-        var db = {};
-        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-        db.schema.update(query, updateModifier, options, (error, settingReplaced, affectedDocuments, upsert) => {
+        udb[tableName].update(query, updateModifier, options, (error, settingReplaced, affectedDocuments, upsert) => {
             if (error) {
                 return reject(error)
             }
@@ -346,9 +336,7 @@ var update = exports.update = function(query, updateModifier, options, tableName
 
 var remove = exports.remove = function (query, options, tableName) {
     return new Promise ((resolve,reject) => {
-        var db = {};
-        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-        db.schema.remove(query, options, (error, numRemoved) => {
+        udb[tableName].remove(query, options, (error, numRemoved) => {
             if (error) {
                 return reject(error)
             }
@@ -359,9 +347,7 @@ var remove = exports.remove = function (query, options, tableName) {
 
 var findOne = exports.findOne = function (object, tableName) {
     return new Promise ((resolve,reject) => {
-        var db = {};
-        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-        db.schema.findOne(object, (error, doc) => {
+        udb[tableName].findOne(object, (error, doc) => {
             if (error) {
                 return reject(error)
             }
@@ -372,9 +358,7 @@ var findOne = exports.findOne = function (object, tableName) {
 
 var count = exports.count = function (object, tableName) {
     return new Promise ((resolve,reject) => {
-        var db = {};
-        db.schema = new Datastore({ filename: `${__dirname}/datastore/local/${tableName}`, autoload: true });
-        db.schema.count(object, (error, count) => {
+        udb[tableName].count(object, (error, count) => {
             if (error) {
                 return reject(error)
             }
