@@ -54,7 +54,7 @@ ipcMain.on('is-new-user', async (e, msg) => {
       e.sender.send('is-new-user', {error:"User already exists"})
       return
     }
-    await datastore.newUser(msg.email, msg.password, msg.username, msg.organization)
+    await datastore.newUser(msg)
     loadPage('login.html')
   } catch(error) {
     e.sender.send('is-new-user', false)
