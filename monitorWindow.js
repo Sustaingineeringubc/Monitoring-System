@@ -38,6 +38,8 @@ exports.createWindow = (monitorWindow) => {
   return this.win;
 }
 
+// [ Triggers ]
+
 ipcMain.on('get-history', async (e, msg) => {
   try {
     let from  = msg.data.from

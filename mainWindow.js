@@ -8,11 +8,6 @@ var loadingState = "Kicking off engines."
 
 exports.win
 
-ipcMain.on('loading-state', (e, msg) => {
-  e.sender.send('loading-state', loadingState)
-})
-
-
 // mainWindow createWindow fn
 exports.createWindow = (mainWindow, fileName) => {
   this.win = mainWindow
@@ -46,6 +41,11 @@ var loadPage = exports.loadPage = (name) => {
   }
 }
 
+// [ Triggers ]
+
+ipcMain.on('loading-state', (e, msg) => {
+  e.sender.send('loading-state', loadingState)
+})
 
 ipcMain.on('is-new-user', async (e, msg) => {
   try {
