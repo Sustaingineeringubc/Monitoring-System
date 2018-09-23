@@ -53,9 +53,9 @@ var passwordCheckEmpty = function (password) {
 }
 
 ipcRenderer.on('is-new-user', (e, msg) => {
-if (msg.error) {
-    alert( msg.error)
-}
+    if (msg.error) {
+        alert( msg.error)
+    }
 })
 
 var signupTitle = $("#signupTitle");

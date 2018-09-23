@@ -145,13 +145,15 @@ exports.loginUser = function(email, password, isRemember) {
     })
 }
 
-exports.newUser = function(email, password) {
+exports.newUser = function(email, password, username, organization) {
     return new Promise(async (resolve, reject) => {
         try {
             // Document object declaration
             var uInfoDoc = { 
                 email: email,
                 password: password,
+                username: username,
+                organization: organization,
                 created_at: Math.round((new Date()).getTime() / 1000),
             };
             // Insert document into database
