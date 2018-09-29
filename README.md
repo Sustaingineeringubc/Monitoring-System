@@ -27,6 +27,15 @@ These instructions will get you a copy of the project up and running on your loc
     ```
     git clone https://github.com/Sustaingineeringubc/Monitoring-System.git
     ```
+2. Navigate to `Monitoring-System` directory
+3. Intall project dependencies
+    ```
+    npm install
+    ```
+4. Start the app
+    ```
+    npm start
+    ```
 
 ## Running the tests
 
