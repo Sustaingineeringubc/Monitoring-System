@@ -24,9 +24,6 @@ These instructions will get you a copy of the project up and running on your loc
 ### Installing
 
     1. Create this repo
-        ```
-        git clone https://github.com/Sustaingineeringubc/Monitoring-System.git
-        ```
 
 
 ## Running the tests
