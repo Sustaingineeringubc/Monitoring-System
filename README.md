@@ -18,8 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Intalling npm and node JS
 
-    1. Go to this site https://www.npmjs.com/get-npm and 
-    2. follow instructions
+    1. Go to this site https://www.npmjs.com/get-npm and follow instructions
 
 ### Intalling
 
