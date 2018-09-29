@@ -1,15 +1,14 @@
-# Monitoring-System
-
-# Project Title
-
+# Horus Monitoring
 
 A remote monitoring system
 
-One Paragraph of project description goes here
+UBC Sustaingineering is working in partnership with ENICALSA (Renewable solutions company in Nicaragua) to design and develop a 3G-network monitoring system for solar water pumps.
+
+ Horus an electron based desktop application (MacOS, Windows, Linux) aims to facilitate the monitoring and data collection for the 30 currently installed solar panels in Nicargua.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
@@ -17,11 +16,11 @@ These instructions will get you a copy of the project up and running on your loc
 (These are the general steps. This is still missing formating, content, but will serve as backbone for the whole file).
 .:
 1. Open the terminal
-2. Install Git
-    1. Write git there, a wizard will appear, so you follow the instructions
-    2. Write git, and if you get commands, it is installed
-3. Create a folder to clone your repo
-    1. To clone your repo, go to the terminal, and travel to the folder. Do this by pressing cd then folder name. Ls to give you general idea
+
+3. Create this repo
+    ```
+    git clone https://github.com/Sustaingineeringubc/Monitoring-System.git
+    ```
     2. Once you’re in the folder, type git clone “link” https
 4. Install npm
     1. Go to this site “”, then download node for your platform. Follow the wizard. Once you do, you can write node -v to check the current version, which implies it is connected. This installed both node and npm (node package manager)
