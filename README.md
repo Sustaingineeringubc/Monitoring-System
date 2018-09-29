@@ -23,7 +23,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Intalling
 
-1. clone this repo
+1. Clone this repo
+    ```
+    git clone https://github.com/Sustaingineeringubc/Monitoring-System.git
+    ```
 
 ## Running the tests
 
