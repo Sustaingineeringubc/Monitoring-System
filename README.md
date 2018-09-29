@@ -21,10 +21,6 @@ These instructions will get you a copy of the project up and running on your loc
     1. Go to this site https://www.npmjs.com/get-npm and 
     2. follow instructions
 
-### Installing
-
-    1. Create this repo
-
 
 ## Running the tests
 
