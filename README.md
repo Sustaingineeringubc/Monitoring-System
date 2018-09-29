@@ -45,7 +45,7 @@ Explain how to run the automated tests for this system
 
 ## Build
 
-Building an electron project will generate an platfrom bsed native application build. This binary can then be used to install a Horus app distribution into Windows, MacOS and Linux.
+Building an electron project will generate an platfrom based native binary. This binary can then be used to install a Horus app distribution into Windows, MacOS and Linux.
 
 1. Bulding the distribution
     ```
