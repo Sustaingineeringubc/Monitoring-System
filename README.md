@@ -54,7 +54,7 @@ Building an electron project will generate an platfrom bsed native application b
 
 ## Authors
 
-* **Felipe Ballesteros** - *Team lead* - [PurpleBooth](https://github.com/febg)
+* **Felipe Ballesteros** - *Team lead* - [FEBG](https://github.com/febg)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
