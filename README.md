@@ -23,6 +23,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Intalling
 
+1. clone this repo
+
 ## Running the tests
 
 Explain how to run the automated tests for this system
