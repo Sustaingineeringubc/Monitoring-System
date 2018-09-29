@@ -34,7 +34,7 @@ These instructions will get you a copy of the project up and running on your loc
         1. npm install
         ```
         ```
-        2.nNpm start!
+        2.npm start!
         ```
 
 ## Running the tests
