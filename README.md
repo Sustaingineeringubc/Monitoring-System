@@ -14,13 +14,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 
 (These are the general steps. This is still missing formating, content, but will serve as backbone for the whole file).
-.:
 
 1. Intalling npm and node JS
 
     1. Go to this site https://www.npmjs.com/get-npm and follow instructions
 
-### Intalling
+
+### Installing
 
 1. Clone this repo
     ```
@@ -61,14 +61,3 @@ See also the list of [contributors](https://github.com/your/project/contributors
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-
-
-
-
-
-
-
-
-
-
