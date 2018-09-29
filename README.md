@@ -15,25 +15,26 @@ These instructions will get you a copy of the project up and running on your loc
 
 (These are the general steps. This is still missing formating, content, but will serve as backbone for the whole file).
 .:
-1. Open the terminal
 
-3. Create this repo
+1. Intalling npm and node JS
+    -> Go to this site https://www.npmjs.com/get-npm and follow instructions
+
+### Installing
+
+1. Create this repo
     ```
     git clone https://github.com/Sustaingineeringubc/Monitoring-System.git
     ```
-    2. Once you’re in the folder, type git clone “link” https
-4. Install npm
-    1. Go to this site “”, then download node for your platform. Follow the wizard. Once you do, you can write node -v to check the current version, which implies it is connected. This installed both node and npm (node package manager)
-5. Npm install
-    1. This will download the dependencies in the JSON file inside the project. This will make all the libraries/code fully work!
-6. Npm start!
+2. Navigate to `Monitoring-System`
+
+3. Run the following commands in sequence
+    ```
+    1. npm install
+    ```
+    ```
+    2.nNpm start!
+    ```
 .:
-
-```
-Give examples
-```
-
-### Installing
 
 A step by step series of examples that tell you how to get a development env running
 
