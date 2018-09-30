@@ -55,8 +55,10 @@ Building an electron project will generate an platfrom based native binary. This
 ## Authors
 
 * **Felipe Ballesteros** - *Team lead* - [FEBG](https://github.com/febg)
+* **Adrian Viquez** - *Team Member* - [aviquez96](https://github.com/aviquez96)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+See also the list of [contributors](https://github.com/Sustaingineeringubc/Monitoring-System/graphs/contributors) who participated in this project.
 
 ## License
 
