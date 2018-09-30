@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- Bulma Version 0.7.1-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <!--CHECK CSS-->
     <link rel="stylesheet" type="text/css" href="../css/login.css">
 </head>
 
@@ -20,17 +21,9 @@
         <div class="hero-body background">
             <div class="container has-text-centered">
                 <div class="column is-4 is-offset-4">
-                    <h3 class="title has-text-white hidden" id="signupTitle">Sign up</h3>
-                    <p class="subtitle has-text-white hidden" id="signupSubtitle">Please login to proceed.</p>
+                    <h3 class="title has-text-white hidden" id="passwordResetTitle">Reset Password</h3>
+                    <p class="subtitle has-text-white hidden" id="passwordResetSubtitle">Please enter your email.</p>
                     <div class="box hidden" id="box">
-                        <div class="field">
-                            <div class="control has-icons-left">
-                                <input class="input is-normal" type="text" placeholder="Organization" id="organization">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-building"></i>
-                                </span>
-                            </div>
-                        </div>
                         <div class="field">
                                 <div class="control has-icons-left has-icons-right">
                                     <input class="input is-normal" type="email" placeholder="Your Email" autofocus="" id="email">
@@ -42,28 +35,11 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="field">
-                                <div class="control has-icons-left">
-                                    <input class="input is-normal" type="text" placeholder="Username" id="username">
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-user"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="control has-icons-left">
-                                    <input class="input is-normal" type="password" placeholder="Your Password" id="password">
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-lock"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        <button class="button is-block is-primary is-fullwidth" id="signup-button">Sign up</button>
+                        <button class="button is-block is-primary is-fullwidth" id="verifyEmail-button">Verify Email</button>
                     </div>
                     <p class="has-text-white">
-                        <a href="../renderer/login.html">Log in</a> &nbsp;·&nbsp;
-                        <a href="../renderer/verifyEmail.html">Forgot Password</a> &nbsp;·&nbsp;
-                        <a href="../">Need Help?</a>
+                        <a href="../renderer/signup.html">Sign Up</a> &nbsp;·&nbsp;
+                        <a href="../renderer/login.html">Log in</a>
                     </p>
                 </div>
             </div>
