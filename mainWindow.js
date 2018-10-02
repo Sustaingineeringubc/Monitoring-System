@@ -5,6 +5,8 @@ const {BrowserWindow, ipcMain} = require('electron');
 const datastore = require('./datastore.js');
 const filewatch = require('./datasource/filewatch');
 var loadingState = "Kicking off engines."
+//User Email
+var userEmail = ""
 
 exports.win
 
@@ -58,5 +60,32 @@ ipcMain.on('is-new-user', async (e, msg) => {
     loadPage('login.html')
   } catch(error) {
     e.sender.send('is-new-user', false)
+  }
+})
+
+//Verify email
+ipcMain.on('email-exists', async (e, msg) => {
+  try {
+    let emailExists = await datastore.findUser(msg.email)
+    if (!emailExists) {
+      e.sender.send('email-exists', {error:"Email does not exist"})
+      return
+    }
+    userEmail = msg.email
+    loadPage('resetPassword.html')
+  } catch(error) {
+    e.sender.send('email-exists', false)
+  }
+})
+
+//Reset Password
+ipcMain.on('new-password', async (e, msg) => {
+  try {
+    //Save new password to the mapped email
+    await datastore.newPassword({email: userEmail, password: msg.password})
+    e.sender.send('new-password', false)
+    loadPage('login.html')
+  } catch(error) {
+    e.sender.send('new-password', false)
   }
 })

@@ -24,9 +24,16 @@ var emailCheckEmpty = function (email) {
 
 ipcRenderer.on('email-exists', (e, msg) => {
     if (msg.error) {
-        alert( msg.error)
+        alert(msg.error)
     }
 })
+
+var verifyEmailTitle = $("#verifyEmailTitle");
+var verifyEmailSubtitle = $("#verifyEmailSubtitle");
+var box = $("#box");
+verifyEmailTitle.slideToggle("slow");
+verifyEmailSubtitle.slideToggle("slow");
+box.slideToggle("slow");
 
 function SendForm(event) {
     if(event){
@@ -39,7 +46,7 @@ function SendForm(event) {
     let email = $('#email').val();
     let isRemembered = $('#remember').prop('checked');
 
-    // Looses focus effect when signup button is pressed
+    // Looses focus effect when button is pressed
     $('#email').blur();
 
     if (!email) {
