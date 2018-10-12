@@ -166,6 +166,32 @@ exports.newUser = function(msg) {
     })
 }
 
+//Update Password
+exports.newPassword = function(msg) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const user = await find({ email: msg.email }, 'userInfo')
+            var uInfoDoc = {
+                email: msg.email,
+                password: msg.password,
+                username: user[0].username,
+                organization: user[0].organization,
+                created_at: user[0].created_at
+            };
+            udb.userInfo.update(user[0], uInfoDoc, {}, (error, passwordReplace) => {
+                if(error) {
+                    return reject(error)
+                }
+                return resolve(true)
+            })
+        } catch(error) {
+            if(error) {
+                return reject(error)
+            }
+        }
+    })
+}
+
 exports.storeSensorData = function(data) {
     return new Promise(async (resolve, reject) => {
         try {
