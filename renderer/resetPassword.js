@@ -21,11 +21,11 @@ var passwordCheckEmpty = function (password) {
 }
 
 ipcRenderer.on('new-password', (e, msg) => {
-    if (msg.error) {
-        alert(msg.error)
+    if(msg.success) {
+        alert(msg.success)
     }
-    else {
-        alert('Password successfully changed!')
+    else if (msg.error) {
+        alert(msg.error)
     }
 })
 

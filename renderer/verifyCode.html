@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign up</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!-- Bulma Version 0.7.1-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <!--CHECK CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+</head>
+
+<body>
+    <section class="hero is-fullheight">
+        <div class="hero-body background">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title has-text-white hidden" id="verifyCodeTitle">Forgot Password?</h3>
+                    <p class="subtitle has-text-white hidden" id="verifyCodeSubtitle">Please enter Verification Code sent to your email.</p>
+                    <div class="box hidden" id="box">
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-normal" type="text" placeholder="Verification Code" autofocus="" id="code">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <button class="button is-block is-primary is-fullwidth" id="verifyCode-button">Verify Code</button>
+                    </div>
+                    <p class="has-text-white">
+                        <a href="../renderer/signup.html">Sign Up</a> &nbsp;·&nbsp;
+                        <a href="../renderer/login.html">Log in</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // jQuery
+        $ = require('jquery')
+        // Main app script
+        require('./verifyCode')
+    </script>
+</body>
+
+</html>
