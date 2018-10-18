@@ -131,6 +131,7 @@ ipcMain.on('verify-code', async (e, msg) => {
       e.sender.send('verify-code', {error: 'Wrong Verification Code entered'})
       return
     }
+    verificationCode = ""
     loadPage('resetPassword.html')
   } catch(error) {
     e.sender.send('verify-code', false)

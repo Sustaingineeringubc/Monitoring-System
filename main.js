@@ -51,7 +51,7 @@ ipcMain.on('log-out', async (e, msg) => {
 
 ipcMain.on('log-in', async (e, msg) => {
   try {
-    let isLoggedIn = await datastore.loginUser(msg.email, msg.password, msg.isRemembered)
+    let isLoggedIn = await datastore.loginUser(msg.user, msg.password, msg.isRemembered)
     if (!isLoggedIn) {
       e.sender.send('log-in', {error: "Incorrect username or password"})
       return
