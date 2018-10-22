@@ -14,7 +14,7 @@ ipcRenderer.on('log-in', (e, msg) => {
     if (msg.error) { return alert(msg.error)}
 })
 
-var userEmpty = function (user) {
+var userCheckEmpty = function (user) {
     if(!user) {
         $('#user').addClass("is-danger");
         $('#user').removeClass("is-primary");
