@@ -6,7 +6,7 @@ $('#login-button').click(() => {
 });
 
 // Enter-Key Functionality
-$("#email, #password").keypress(function(event) {
+$("#user, #password").keypress(function(event) {
     SendForm(event) 
 })
 
@@ -14,15 +14,15 @@ ipcRenderer.on('log-in', (e, msg) => {
     if (msg.error) { return alert(msg.error)}
 })
 
-var emailCheckEmpty = function (email) {
-    if(!email) {
-        $('#email').addClass("is-danger");
-        $('#email').removeClass("is-primary");
-        $('#emailCheckbox').addClass("hidden");
+var userCheckEmpty = function (user) {
+    if(!user) {
+        $('#user').addClass("is-danger");
+        $('#user').removeClass("is-primary");
+        $('#userCheckbox').addClass("hidden");
     } else {
-        $('#email').addClass("is-primary");
-        $('#email').removeClass("is-danger");
-        $('#emailCheckbox').removeClass("hidden");
+        $('#user').addClass("is-primary");
+        $('#user').removeClass("is-danger");
+        $('#userCheckbox').removeClass("hidden");
     }
 }
 
@@ -55,17 +55,17 @@ function SendForm(event) {
     }
 
     let password = $('#password').val();
-    let email = $('#email').val();
+    let user = $('#user').val();
     let isRemembered = $('#remember').prop('checked');
 
     // Looses focus effect when signup button is pressed
-    $('#email').blur();
+    $('#user').blur();
     $('#password').blur();
 
-    if (!email || !password) {
-        emailCheckEmpty(email);
+    if (!user || !password) {
+        userCheckEmpty(user);
         passwordCheckEmpty(password);
         return
     }
-    ipcRenderer.send('log-in', {password, email, isRemembered}) 
+    ipcRenderer.send('log-in', {password, user, isRemembered}) 
 }
